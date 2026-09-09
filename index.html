@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Зоряний Верх — Маршруты</title>
+  <title>Зоряний Верх — Офлайн Гид</title>
 
   <!-- PWA настройки -->
   <link rel="manifest" href="manifest.json">
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- Swiper.js (Слайдер фото) -->
+  <!-- Swiper.js -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -47,7 +47,7 @@
 
     #map {
       width: 100%;
-      height: 240px;
+      height: 260px;
       border-radius: 16px;
       margin-bottom: 16px;
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -100,10 +100,7 @@
       height: 210px;
     }
 
-    .swiper {
-      width: 100%;
-      height: 100%;
-    }
+    .swiper { width: 100%; height: 100%; }
 
     .swiper-slide img {
       width: 100%;
@@ -150,34 +147,28 @@
     .meta-info { display: flex; gap: 10px; font-size: 12px; color: var(--sec-text); }
     .description { font-size: 13px; color: var(--sec-text); line-height: 1.4; margin: 0; }
 
-    .inline-link {
-      color: var(--link-color);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .inline-link:hover { text-decoration: underline; }
-
     .btn-group { display: flex; gap: 8px; margin-top: 6px; }
 
     .btn {
       flex: 1;
       background-color: var(--accent-color); color: #000;
       text-decoration: none; text-align: center; font-weight: 700;
-      font-size: 13px; padding: 10px; border-radius: 10px; display: block;
+      font-size: 14px; padding: 12px; border-radius: 12px; display: block;
     }
 
-    .btn-secondary {
-      background-color: var(--card-sub-bg);
-      color: var(--text-color);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Кастомная иконка домика на карте */
+    .home-marker-icon {
+      font-size: 24px;
+      text-align: center;
+      line-height: 30px;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>🏡 «Зоряний верх» — Локации</h1>
-    <p class="subtitle">База: Будиночки «Зоряний верх» (48.253884, 24.917059)</p>
+    <h1>🏡 Жилище «Зоряний верх»</h1>
+    <p class="subtitle">База: Буковецкий перевал (48.253884, 24.917059)</p>
 
     <!-- ИНТЕРАКТИВНАЯ КАРТА -->
     <div id="map"></div>
@@ -186,11 +177,11 @@
     <div class="controls-container">
       <div class="select-group">
         <select id="category-filter" onchange="applyFilters()">
-          <option value="all">Все локации</option>
-          <option value="walk">🚶 Пешком от домика</option>
+          <option value="all">Все локации (в пределах 30 км)</option>
+          <option value="walk">🚶 Пешком от жилища</option>
           <option value="auto">🚗 На машине</option>
           <option value="waterfall">🌊 Водопады</option>
-          <option value="culture">🏰 Культура и Села</option>
+          <option value="culture">🏰 Культура и Музеи</option>
         </select>
 
         <select id="sort-filter" onchange="applyFilters()">
@@ -210,7 +201,7 @@
     <div class="card route-card" data-category="walk" data-dist="0" data-diff="1">
       <div class="card-slider">
         <div class="diff-tag">🟢 Легкая сложность</div>
-        <div class="badge">📍 0 км (От домика)</div>
+        <div class="badge">📍 0 км (От жилища)</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Буковец"></div>
@@ -219,12 +210,12 @@
         </div>
       </div>
       <div class="content">
-        <span class="road-tag">🚶 ПЕШКОМ ОТ ДОМИКА</span>
+        <span class="road-tag">🚶 ПЕШКОМ ОТ ЖИЛИЩА</span>
         <h2 class="title">Буковецкий перевал</h2>
-        <div class="meta-info"><span>835 м н.у.м.</span><span>Пеший загородный маршрут</span></div>
-        <p class="description">Перевал прямо возле вашего домика. Идеальное место для неспешных пеших прогулок с видом на вершины Карпат.</p>
+        <div class="meta-info"><span>835 м н.у.м.</span><span>Прогулка рядом</span></div>
+        <p class="description">Перевал прямо возле вашего жилища. Идеальное место для неспешных пеших прогулок с панорамным видом.</p>
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/6K9v3M2P8d1E5a7Z8" target="_blank" class="btn">📍 Google Maps</a>
+          <a href="mapsme://map?ll=48.253884,24.917059&n=Буковецкий%20перевал" class="btn">🗺️ Открыть в MAPS.ME</a>
         </div>
       </div>
     </div>
@@ -233,7 +224,7 @@
     <div class="card route-card" data-category="walk" data-dist="5" data-diff="2">
       <div class="card-slider">
         <div class="diff-tag">🟡 Средняя сложность</div>
-        <div class="badge">📍 5 км (Пешком от дома)</div>
+        <div class="badge">📍 5 км (Пешком)</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Писаный Камень"></div>
@@ -242,12 +233,12 @@
         </div>
       </div>
       <div class="content">
-        <span class="road-tag">🚶 ПЕШКОМ ОТ ДОМИКА</span>
+        <span class="road-tag">🚶 ПЕШКОМ ОТ ЖИЛИЩА</span>
         <h2 class="title">Скалы «Писаный Камень»</h2>
-        <div class="meta-info"><span>Высота скал ~20 м</span><span>Древнее место силы</span></div>
-        <p class="description">Легендарные скалы с языческими петроглифами. Удобный пеший маршрут идёт по хребту от Буковецкого перевала.</p>
+        <div class="meta-info"><span>Высота скал ~20 м</span><span>Пеший хребет</span></div>
+        <p class="description">Легендарные языческие скалы. Пеший живописный маршрут проходит прямо по хребту от вашего жилища.</p>
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/9P2v4K1M8d7E3a5Z9" target="_blank" class="btn">📍 Google Maps</a>
+          <a href="mapsme://map?ll=48.1818,24.9792&n=Писаный%20Камень" class="btn">🗺️ Открыть в MAPS.ME</a>
         </div>
       </div>
     </div>
@@ -256,7 +247,7 @@
     <div class="card route-card" data-category="auto walk" data-dist="7" data-diff="2">
       <div class="card-slider">
         <div class="diff-tag">🟡 Средняя сложность</div>
-        <div class="badge">🚗 7 км (Авто / Пешком)</div>
+        <div class="badge">🚗 7 км от жилища</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80" alt="Терношоры"></div>
@@ -266,11 +257,11 @@
       </div>
       <div class="content">
         <span class="road-tag">🚗 АВТО / 🚶 ПЕШКОМ</span>
-        <h2 class="title">Урочище Терношоры (Терношорская Лада)</h2>
-        <div class="meta-info"><span>Скальный комплекс</span><span>Древнее святилище</span></div>
-        <p class="description">Уникальный скальный массив в хвойном лесу, напоминающий силуэт беременной женщины («Лады»).</p>
+        <h2 class="title">Урочище Терношоры (Лада)</h2>
+        <div class="meta-info"><span>Скальный комплекс</span><span>Место силы</span></div>
+        <p class="description">Уникальный скальный массив среди хвойного леса, напоминающий древнее святилище.</p>
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/34gQxXAtJm32A7P19" target="_blank" class="btn">📍 Google Maps</a>
+          <a href="mapsme://map?ll=48.2322,24.9083&n=Урочище%20Терношоры" class="btn">🗺️ Открыть в MAPS.ME</a>
         </div>
       </div>
     </div>
@@ -279,7 +270,7 @@
     <div class="card route-card" data-category="auto culture" data-dist="10" data-diff="1">
       <div class="card-slider">
         <div class="diff-tag">🟢 Легкая сложность</div>
-        <div class="badge">🚗 10 км на авто</div>
+        <div class="badge">🚗 10 км</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80" alt="Криворовня"></div>
@@ -288,12 +279,12 @@
         </div>
       </div>
       <div class="content">
-        <span class="road-tag">🛣️ АСФАЛЬТ</span>
+        <span class="road-tag">I10🛣️ АСФАЛЬТ</span>
         <h2 class="title">Село Криворовня (Хата-гражда)</h2>
-        <div class="meta-info"><span>Гуцульская столица</span><span>Музеи и история</span></div>
-        <p class="description">Культурный центр Гуцульщины. Здесь снимали фильм «Тени забытых предков». Аутентичные музеи и традиционные хаты-гражды.</p>
+        <div class="meta-info"><span>Гуцульская столица</span><span>Музеи</span></div>
+        <p class="description">Культурная столица Гуцульщины с традиционными деревянными хатами-граждами и музеями.</p>
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/3M7v1A9K2f8D4w6E9" target="_blank" class="btn">📍 Google Maps</a>
+          <a href="mapsme://map?ll=48.1883,24.8986&n=Криворовня" class="btn">🗺️ Открыть в MAPS.ME</a>
         </div>
       </div>
     </div>
@@ -302,7 +293,7 @@
     <div class="card route-card" data-category="auto waterfall" data-dist="12" data-diff="1">
       <div class="card-slider">
         <div class="diff-tag">🟢 Легкая сложность</div>
-        <div class="badge">🚗 12 км на авто</div>
+        <div class="badge">🚗 12 км</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Яворовский Гук"></div>
@@ -313,10 +304,10 @@
       <div class="content">
         <span class="road-tag">🌊 ВОДОПАД</span>
         <h2 class="title">Водопад Яворовский Гук</h2>
-        <div class="meta-info"><span>Село Яворов</span><span>Живописная река</span></div>
-        <p class="description">Красивый водопад в селе Яворов, известном своими традиционными гуцульскими покрывалами (лижниками).</p>
+        <div class="meta-info"><span>Село Яворов</span><span>Река</span></div>
+        <p class="description">Красивый каскадный водопад в селе Яворов, известном народными гуцульскими ремеслами.</p>
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/uX3h1sE7Wz4x2E8D7" target="_blank" class="btn">📍 Google Maps</a>
+          <a href="mapsme://map?ll=48.2433,24.9819&n=Яворовский%20Гук" class="btn">🗺️ Открыть в MAPS.ME</a>
         </div>
       </div>
     </div>
@@ -325,7 +316,7 @@
     <div class="card route-card" data-category="auto waterfall" data-dist="13" data-diff="1">
       <div class="card-slider">
         <div class="diff-tag">🟢 Легкая сложность</div>
-        <div class="badge">🚗 13 км на авто</div>
+        <div class="badge">🚗 13 км</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Гелетовский"></div>
@@ -336,10 +327,10 @@
       <div class="content">
         <span class="road-tag">🌊 ВОДОПАД</span>
         <h2 class="title">Водопад Гелетовский</h2>
-        <div class="meta-info"><span>Малоизвестный водопад</span><span>Тихое место</span></div>
-        <p class="description">Живописный водопад на горном ручье, скрытый от шумных туристических потоков.</p>
+        <div class="meta-info"><span>Уединенный водопад</span><span>Тишина</span></div>
+        <p class="description">Живописный уединенный водопад на лесном ручье неподалеку от трассы.</p>
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/9m2K8E5F7yA8w1Z39" target="_blank" class="btn">📍 Google Maps</a>
+          <a href="mapsme://map?ll=48.2381,24.9883&n=Водопад%20Гелетовский" class="btn">🗺️ Открыть в MAPS.ME</a>
         </div>
       </div>
     </div>
@@ -348,7 +339,7 @@
     <div class="card route-card" data-category="auto waterfall" data-dist="14" data-diff="1">
       <div class="card-slider">
         <div class="diff-tag">🟢 Легкая сложность</div>
-        <div class="badge">🚗 14 км на авто</div>
+        <div class="badge">🚗 14 км</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Жолоб"></div>
@@ -359,10 +350,10 @@
       <div class="content">
         <span class="road-tag">🌊 ВОДОПАД</span>
         <h2 class="title">Водопад Жолоб</h2>
-        <div class="meta-info"><span>Ущелье</span><span>Каскадный спуск</span></div>
-        <p class="description">Интересный водопад, промывший глубокий каменный жолоб в скалах.</p>
+        <div class="meta-info"><span>Каменный узел</span><span>Лес</span></div>
+        <p class="description">Интересный горный водопад, промочивший глубокое русло в каменной скале.</p>
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/YVp9wB4xN2D6A5mZ8" target="_blank" class="btn">📍 Google Maps</a>
+          <a href="mapsme://map?ll=48.2325,24.9922&n=Водопад%20Жолоб" class="btn">🗺️ Открыть в MAPS.ME</a>
         </div>
       </div>
     </div>
@@ -371,7 +362,7 @@
     <div class="card route-card" data-category="auto culture" data-dist="15" data-diff="1">
       <div class="card-slider">
         <div class="diff-tag">🟢 Легкая сложность</div>
-        <div class="badge">🚗 15 км на авто</div>
+        <div class="badge">🚗 15 км</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80" alt="Дідова хатчина"></div>
@@ -382,10 +373,10 @@
       <div class="content">
         <span class="road-tag">🎨 АРТ-ПРОСТРАНСТВО</span>
         <h2 class="title">Арт-пространство «Дідова хатчина»</h2>
-        <div class="meta-info"><span>Культурный хаб</span><span>Локальная кухня</span></div>
-        <p class="description">Уютное творческое пространство в Яворове, переосмысляющее гуцульские традиции, ремёсла и гастрономию.</p>
+        <div class="meta-info"><span>Культурный хаб</span><span>Кухня</span></div>
+        <p class="description">Атмосферное творческое место в Яворове с локальной кухней и мастер-классами.</p>
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/2L4d6E8f9Y3k1A9Z6" target="_blank" class="btn">📍 Google Maps</a>
+          <a href="mapsme://map?ll=48.2411,24.9989&n=Дідова%20хатчина" class="btn">🗺️ Открыть в MAPS.ME</a>
         </div>
       </div>
     </div>
@@ -394,7 +385,7 @@
     <div class="card route-card" data-category="auto walk" data-dist="18" data-diff="2">
       <div class="card-slider">
         <div class="diff-tag">🟡 Средняя сложность</div>
-        <div class="badge">🚗 18 км (Авто + Пешком)</div>
+        <div class="badge">🚗 18 км</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Сокильский"></div>
@@ -405,10 +396,10 @@
       <div class="content">
         <span class="road-tag">⛰️ ХРЕБЕТ</span>
         <h2 class="title">Хребет Сокильский</h2>
-        <div class="meta-info"><span>Высокие скалы</span><span>Панорамы</span></div>
-        <p class="description">Скальный хребет с невероятными обрывами и пешими тропами вдоль вершины.</p>
+        <div class="meta-info"><span>Скальные выходы</span><span>Панорамы</span></div>
+        <p class="description">Скальный хребет с высокими каменными останцами и обзором на долину реки.</p>
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/N5E8e8A4kG1P3m1A8" target="_blank" class="btn">📍 Google Maps</a>
+          <a href="mapsme://map?ll=48.2721,25.0880&n=Хребет%20Сокильский" class="btn">🗺️ Открыть в MAPS.ME</a>
         </div>
       </div>
     </div>
@@ -417,7 +408,7 @@
     <div class="card route-card" data-category="auto" data-dist="20" data-diff="1">
       <div class="card-slider">
         <div class="diff-tag">🟢 Легкая сложность</div>
-        <div class="badge">🚗 20 км на авто</div>
+        <div class="badge">🚗 20 км</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Каменная Богачка"></div>
@@ -426,12 +417,12 @@
         </div>
       </div>
       <div class="content">
-        <span class="road-tag">🗿 ПРИРОДНЫЙ ПАМЯТНИК</span>
+        <span class="road-tag">🗿 ПАМЯТНИК ПРИРОДЫ</span>
         <h2 class="title">Скала «Каменная Богачка»</h2>
-        <div class="meta-info"><span>Геологический памятник</span><span>Легенда</span></div>
-        <p class="description">Одиночная уникальная скала пирамидальной формы с народными легендами в районе реки Черемош.</p>
+        <div class="meta-info"><span>Уникальная скала</span><span>Легенды</span></div>
+        <p class="description">Одиноко стоящая 20-метровая геологическая скала пирамидальной формы.</p>
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/1N8v3M9P4d2E6a8Z7" target="_blank" class="btn">📍 Google Maps</a>
+          <a href="mapsme://map?ll=48.2111,25.0219&n=Каменная%20Богачка" class="btn">🗺️ Открыть в MAPS.ME</a>
         </div>
       </div>
     </div>
@@ -440,7 +431,7 @@
     <div class="card route-card" data-category="auto walk" data-dist="22" data-diff="2">
       <div class="card-slider">
         <div class="diff-tag">🟡 Средняя сложность</div>
-        <div class="badge">🚗 22 км (Авто + Пешком)</div>
+        <div class="badge">🚗 22 км</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Плоский"></div>
@@ -452,9 +443,9 @@
         <span class="road-tag">⛰️ ХРЕБЕТ</span>
         <h2 class="title">Хребет Плоский</h2>
         <div class="meta-info"><span>Полонины</span><span>Тишина</span></div>
-        <p class="description">Просторный полонинный хребет с мягкими подъемами и просторными пейзажами.</p>
+        <p class="description">Просторный хребет с пологими холмами и отличными местами для прогулок.</p>
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/2K8X1A5M9vD3z4B87" target="_blank" class="btn">📍 Google Maps</a>
+          <a href="mapsme://map?ll=48.2889,24.8111&n=Хребет%20Плоский" class="btn">🗺️ Открыть в MAPS.ME</a>
         </div>
       </div>
     </div>
@@ -463,7 +454,7 @@
     <div class="card route-card" data-category="auto walk" data-dist="24" data-diff="2">
       <div class="card-slider">
         <div class="diff-tag">🟡 Средняя сложность</div>
-        <div class="badge">🚗 24 км (Авто + Пешком)</div>
+        <div class="badge">🚗 24 км</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Гора Острый"></div>
@@ -474,10 +465,10 @@
       <div class="content">
         <span class="road-tag">⛰️ ВЕРШИНА</span>
         <h2 class="title">Гора Острый</h2>
-        <div class="meta-info"><span>Смотреть на Косов</span><span>Острая вершина</span></div>
-        <p class="description">Заметная острая вершина над Косовом. Крутой, но очень живописный подъем.</p>
+        <div class="meta-info"><span>Вид на Косов</span><span>Острый пик</span></div>
+        <p class="description">Заметная живописная вершина над городом Косов с красивым круновым обзором.</p>
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/7R6S9vK3pM2A2d7E6" target="_blank" class="btn">📍 Google Maps</a>
+          <a href="mapsme://map?ll=48.3119,25.0411&n=Гора%20Острый" class="btn">🗺️ Открыть в MAPS.ME</a>
         </div>
       </div>
     </div>
@@ -486,7 +477,7 @@
     <div class="card route-card" data-category="auto waterfall" data-dist="25" data-diff="1">
       <div class="card-slider">
         <div class="diff-tag">🟢 Легкая сложность</div>
-        <div class="badge">🚗 25 км на авто</div>
+        <div class="badge">🚗 25 км</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Косовский Гук"></div>
@@ -497,10 +488,10 @@
       <div class="content">
         <span class="road-tag">🌊 ВОДОПАД</span>
         <h2 class="title">Водопад Косовский Гук</h2>
-        <div class="meta-info"><span>Река Рыбница</span><span>Город Косов</span></div>
-        <p class="description">Мощный каскадный водопад прямо на въезде в город Косов. Легко доступен с дороги.</p>
+        <div class="meta-info"><span>Река Рыбница</span><span>Косов</span></div>
+        <p class="description">Широкий мощный водопад на реке Рыбница прямо на въезде в город Косов.</p>
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/7M2x6A9K4vD1e2Z87" target="_blank" class="btn">📍 Google Maps</a>
+          <a href="mapsme://map?ll=48.3120,25.0830&n=Косовский%20Гук" class="btn">🗺️ Открыть в MAPS.ME</a>
         </div>
       </div>
     </div>
@@ -509,7 +500,7 @@
     <div class="card route-card" data-category="auto walk" data-dist="27" data-diff="2">
       <div class="card-slider">
         <div class="diff-tag">🟡 Средняя сложность</div>
-        <div class="badge">🚗 27 км на авто</div>
+        <div class="badge">🚗 27 км</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80" alt="Михалкова"></div>
@@ -520,10 +511,10 @@
       <div class="content">
         <span class="road-tag">⛰️ ВЕРШИНА</span>
         <h2 class="title">Гора Михалкова (Косов)</h2>
-        <div class="meta-info"><span>Высшая точка Косова</span><span>Видовая площадка</span></div>
-        <p class="description">Самая высокая гора над городом Косов с отличным панорамным видом на Прикарпатье.</p>
+        <div class="meta-info"><span>Высшая точка</span><span>Панорама</span></div>
+        <p class="description">Самая высокая гора над Косовом с великолепным видом на предгорья и город.</p>
         <div class="btn-group">
-          <a href="https://maps.app.goo.gl/4N1e7K2P8m3A9w5E7" target="_blank" class="btn">📍 Google Maps</a>
+          <a href="mapsme://map?ll=48.3183,24.9931&n=Гора%20Михалкова" class="btn">🗺️ Открыть в MAPS.ME</a>
         </div>
       </div>
     </div>
@@ -537,7 +528,40 @@
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(map);
 
-    L.marker(home).addTo(map).bindPopup('<b>🏡 Домики «Зоряний верх»</b>').openPopup();
+    // Кастомный маркер для Жилища
+    const homeIcon = L.divIcon({
+      className: 'home-marker-icon',
+      html: '🏡',
+      iconSize: [30, 30],
+      iconAnchor: [15, 15]
+    });
+
+    // Маркер Жилища
+    L.marker(home, { icon: homeIcon }).addTo(map)
+      .bindPopup('<b>🏡 Жилище «Зоряний верх»</b>')
+      .openPopup();
+
+    // Отметка ВСЕХ мест из списка на интерактивной карте
+    const locations = [
+      { name: "Буковецкий перевал", coords: [48.253884, 24.917059] },
+      { name: "Скалы «Писаный Камень»", coords: [48.1818, 24.9792] },
+      { name: "Урочище Терношоры", coords: [48.2322, 24.9083] },
+      { name: "Село Криворовня", coords: [48.1883, 24.8986] },
+      { name: "Водопад Яворовский Гук", coords: [48.2433, 24.9819] },
+      { name: "Водопад Гелетовский", coords: [48.2381, 24.9883] },
+      { name: "Водопад Жолоб", coords: [48.2325, 24.9922] },
+      { name: "Арт-пространство «Дідова хатчина»", coords: [48.2411, 24.9989] },
+      { name: "Хребет Сокильский", coords: [48.2721, 25.0880] },
+      { name: "Скала «Каменная Богачка»", coords: [48.2111, 25.0219] },
+      { name: "Хребет Плоский", coords: [48.2889, 24.8111] },
+      { name: "Гора Острый", coords: [48.3119, 25.0411] },
+      { name: "Водопад Косовский Гук", coords: [48.3120, 25.0830] },
+      { name: "Гора Михалкова", coords: [48.3183, 24.9931] }
+    ];
+
+    locations.forEach(loc => {
+      L.marker(loc.coords).addTo(map).bindPopup(`<b>${loc.name}</b>`);
+    });
 
     // Swiper
     const swipers = new Swiper('.mySwiper', {
