@@ -25,7 +25,7 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
       margin: 0;
@@ -64,18 +64,12 @@
     }
 
     .card-header {
-      height: 140px;
-      background: linear-gradient(135deg, #2c3e50, #27ae60);
+      height: 120px;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .card-header svg {
-      width: 60px;
-      height: 60px;
-      fill: rgba(255, 255, 255, 0.8);
     }
 
     .badge {
@@ -88,7 +82,6 @@
       font-weight: 600;
       padding: 6px 12px;
       border-radius: 20px;
-      backdrop-filter: blur(8px);
     }
 
     .content {
@@ -123,10 +116,6 @@
       border-radius: 14px;
       display: block;
     }
-
-    .btn:active {
-      opacity: 0.8;
-    }
   </style>
 </head>
 <body>
@@ -138,55 +127,47 @@
 
   <div class="container">
     
-    <!-- Карточка 1 -->
     <div class="card">
-      <div class="card-header" style="background: linear-gradient(135deg, #1e3c72, #2a5298);">
-        <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
+      <div class="card-header" style="background: linear-gradient(135deg, #2c3e50, #27ae60);">
         <div class="badge">📍 10 км</div>
       </div>
       <div class="content">
         <h2 class="title">Скала Писаный Камень</h2>
         <p class="description">Огромные живописные скалы высотой до 20 м с древними петроглифами. Известное место с панорамным видом на Гуцульщину.</p>
-        <a href="mapsme://map?ll=48.1818,24.9792&n=%D0%A1%D0%BA%D0%B0%D0%BB%D0%B0%20%D0%9F%D0%B8%D1%81%D0%B0%D0%BD%D1%8B%D0%B9%20%D0%9A%D0%B0%D0%BC%D0%B5%D0%BD%D1%8C" class="btn">Открыть в MAPS.ME</a>
+        <a href="mapsme://map?ll=48.1818,24.9792&n=Писаный%20Камень" class="btn">Открыть в MAPS.ME</a>
       </div>
     </div>
 
-    <!-- Карточка 2 -->
     <div class="card">
       <div class="card-header" style="background: linear-gradient(135deg, #134e5e, #71b280);">
-        <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
         <div class="badge">📍 8 км</div>
       </div>
       <div class="content">
         <h2 class="title">Хребет Игрец</h2>
         <p class="description">Живописный хребет с пастушьими полонинами и отличным панорамным видом на весь Черногорский хребет.</p>
-        <a href="mapsme://map?ll=48.2056,24.8450&n=%D0%A5%D1%80%D0%B5%D0%B1%D0%B5%D1%82%20%D0%98%D0%B3%D1%80%D0%B5%D1%86" class="btn">Открыть в MAPS.ME</a>
+        <a href="mapsme://map?ll=48.2056,24.8450&n=Хребет%20Игрец" class="btn">Открыть в MAPS.ME</a>
       </div>
     </div>
 
-    <!-- Карточка 3 -->
     <div class="card">
       <div class="card-header" style="background: linear-gradient(135deg, #3a1c71, #d76d77);">
-        <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
         <div class="badge">📍 6 км</div>
       </div>
       <div class="content">
         <h2 class="title">Кривопольский перевал</h2>
         <p class="description">Один из самых высоких перевалов Карпат (961 м). Легкий и приятный маршрут по пологим карпатским холмам.</p>
-        <a href="mapsme://map?ll=48.2323,24.8820&n=%D0%9A%D1%80%D0%B8%D0%B2%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D0%B5%D1%80%D0%B5%D0%B2%D0%B0%D0%BB" class="btn">Открыть в MAPS.ME</a>
+        <a href="mapsme://map?ll=48.2323,24.8820&n=Кривопольский%20перевал" class="btn">Открыть в MAPS.ME</a>
       </div>
     </div>
 
-    <!-- Карточка 4 -->
     <div class="card">
       <div class="card-header" style="background: linear-gradient(135deg, #093028, #237a57);">
-        <svg viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>
         <div class="badge">📍 3.5 км</div>
       </div>
       <div class="content">
         <h2 class="title">Обзорная вершина в Верховине</h2>
-        <p class="description">Короткая и простая прогулка через сосновый лес к смотровой площадке с видом на долину реки Чёрный Черемош.</p>
-        <a href="mapsme://map?ll=48.2450,24.9010&n=%D0%9E%D0%B1%D0%B7%D0%BE%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B2%D0%B5%D1%80%D1%88%D0%B8%D0%BD%D0%B0" class="btn">Открыть в MAPS.ME</a>
+        <p class="description">Короткая прогулка через сосновый лес к смотровой площадке с видом на долину реки Чёрный Черемош.</p>
+        <a href="mapsme://map?ll=48.2450,24.9010&n=Верховина%20Обзорная" class="btn">Открыть в MAPS.ME</a>
       </div>
     </div>
 
