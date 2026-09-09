@@ -1,177 +1,111 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Маршруты</title>
-
-  <!-- PWA настройки для iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Маршруты">
-
-  <style>
-    :root {
-      --bg-color: #000000;
-      --card-bg: #1c1c1e;
-      --text-color: #ffffff;
-      --sec-text: #a1a1a6;
-      --accent-color: #30d158;
-    }
-
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 20px 16px 40px 16px;
-    }
-
-    header {
-      padding: 10px 4px 20px 4px;
-    }
-
-    h1 {
-      font-size: 32px;
-      font-weight: 800;
-      margin: 0 0 4px 0;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      color: var(--sec-text);
-      margin: 0;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .card {
-      background-color: var(--card-bg);
-      border-radius: 20px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .card-header {
-      height: 120px;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 6px 12px;
-      border-radius: 20px;
-    }
-
-    .content {
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .title {
-      font-size: 20px;
-      font-weight: 700;
-      margin: 0;
-    }
-
-    .description {
-      font-size: 14px;
-      color: var(--sec-text);
-      line-height: 1.45;
-      margin: 0;
-    }
-
-    .btn {
-      margin-top: 8px;
-      background-color: var(--accent-color);
-      color: #000000;
-      text-decoration: none;
-      text-align: center;
-      font-weight: 700;
-      font-size: 16px;
-      padding: 14px;
-      border-radius: 14px;
-      display: block;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои Пешие Маршруты</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .routes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+        }
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            color: #1a252f;
+        }
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        .btn-maps {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 15px;
+            transition: background 0.2s;
+        }
+        .btn-maps:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <h1>Маршруты от дома</h1>
-    <p class="subtitle">Локация: 48.253884, 24.917059</p>
-  </header>
+    <h1>⛰️ Мои Пешие Маршруты</h1>
 
-  <div class="container">
-    
-    <div class="card">
-      <div class="card-header" style="background: linear-gradient(135deg, #2c3e50, #27ae60);">
-        <div class="badge">📍 10 км</div>
-      </div>
-      <div class="content">
-        <h2 class="title">Скала Писаный Камень</h2>
-        <p class="description">Огромные живописные скалы высотой до 20 м с древними петроглифами. Известное место с панорамным видом на Гуцульщину.</p>
-        <a href="mapsme://map?ll=48.1818,24.9792&n=Писаный%20Камень" class="btn">Открыть в MAPS.ME</a>
-      </div>
+    <div class="routes-grid">
+        <!-- Карточка 1 -->
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcS38-ZjHD4L7fM2QR_z77Bgq9dMo32_s8HTrh3gSIQ1DsXIGs8QaFLtj-fdmqpqC1qgCqcgnPsMx72n4uQ" alt="Писаный Камень">
+            <div class="card-content">
+                <h2>Скалы Писаный Камень</h2>
+                <p>Легкий панорамный маршрут к скальному комплексу с древними петроглифами.</p>
+                <a class="btn-maps" href="https://maps.me/route?from=48.175,24.908" target="_blank">Открыть в MAPS.ME</a>
+            </div>
+        </div>
+
+        <!-- Карточка 2 -->
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcS-Nh65JAXPon63S2_YtuLbpUXmm83srEMSS0-9-kdJnoCALBIBF_Lx6-YC1MOjRjtWftJhwN6Z165HhkY" alt="Хребет Игрец">
+            <div class="card-content">
+                <h2>Хребет Игрец</h2>
+                <p>Живописный хребет с отличным видом на Черногору и полонины.</p>
+                <a class="btn-maps" href="https://maps.me/route?from=48.150,24.820" target="_blank">Открыть в MAPS.ME</a>
+            </div>
+        </div>
+
+        <!-- Карточка 3 -->
+        <div class="card">
+            <img src="https://turua.com.ua/wp-content/uploads/carpathians-view-800x600.jpg" alt="Кривопольский перевал">
+            <div class="card-content">
+                <h2>Кривопольский перевал</h2>
+                <p>Простой маршрут вдоль полонин с выходом на обзорную площадку.</p>
+                <a class="btn-maps" href="https://maps.me/route?from=48.200,24.700" target="_blank">Открыть в MAPS.ME</a>
+            </div>
+        </div>
     </div>
-
-    <div class="card">
-      <div class="card-header" style="background: linear-gradient(135deg, #134e5e, #71b280);">
-        <div class="badge">📍 8 км</div>
-      </div>
-      <div class="content">
-        <h2 class="title">Хребет Игрец</h2>
-        <p class="description">Живописный хребет с пастушьими полонинами и отличным панорамным видом на весь Черногорский хребет.</p>
-        <a href="mapsme://map?ll=48.2056,24.8450&n=Хребет%20Игрец" class="btn">Открыть в MAPS.ME</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-header" style="background: linear-gradient(135deg, #3a1c71, #d76d77);">
-        <div class="badge">📍 6 км</div>
-      </div>
-      <div class="content">
-        <h2 class="title">Кривопольский перевал</h2>
-        <p class="description">Один из самых высоких перевалов Карпат (961 м). Легкий и приятный маршрут по пологим карпатским холмам.</p>
-        <a href="mapsme://map?ll=48.2323,24.8820&n=Кривопольский%20перевал" class="btn">Открыть в MAPS.ME</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-header" style="background: linear-gradient(135deg, #093028, #237a57);">
-        <div class="badge">📍 3.5 км</div>
-      </div>
-      <div class="content">
-        <h2 class="title">Обзорная вершина в Верховине</h2>
-        <p class="description">Короткая прогулка через сосновый лес к смотровой площадке с видом на долину реки Чёрный Черемош.</p>
-        <a href="mapsme://map?ll=48.2450,24.9010&n=Верховина%20Обзорная" class="btn">Открыть в MAPS.ME</a>
-      </div>
-    </div>
-
-  </div>
 
 </body>
 </html>
