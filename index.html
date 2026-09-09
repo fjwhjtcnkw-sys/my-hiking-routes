@@ -1,111 +1,402 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мои Пешие Маршруты</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f6f8;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 30px;
-        }
-        .routes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .card {
-            background: #ffffff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            display: flex;
-            flex-direction: column;
-        }
-        .card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .card-content {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .card h2 {
-            margin-top: 0;
-            font-size: 1.25rem;
-            color: #1a252f;
-        }
-        .card p {
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            flex-grow: 1;
-        }
-        .btn-maps {
-            display: inline-block;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            padding: 10px 16px;
-            border-radius: 6px;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 15px;
-            transition: background 0.2s;
-        }
-        .btn-maps:hover {
-            background-color: #45a049;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Маршруты & Активности</title>
+
+  <!-- PWA настройки для iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Карпаты">
+  <link rel="apple-touch-icon" href="https://img.icons8.com/isometric/512/compass.png">
+
+  <style>
+    :root {
+      --bg-color: #000000;
+      --card-bg: #1c1c1e;
+      --card-sub-bg: #2c2c2e;
+      --text-color: #ffffff;
+      --sec-text: #a1a1a6;
+      --accent-color: #30d158;
+      --accent-active: #24a143;
+      --tag-bg: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 20px 16px 40px 16px;
+    }
+
+    header {
+      padding: 10px 4px 16px 4px;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 800;
+      margin: 0 0 4px 0;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--sec-text);
+      margin: 0 0 16px 0;
+    }
+
+    /* Табы (Переключатель) */
+    .tabs {
+      display: flex;
+      background: var(--card-bg);
+      padding: 4px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--sec-text);
+      border: none;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: #3a3a3c;
+      color: #fff;
+    }
+
+    .section {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section.active {
+      display: flex;
+    }
+
+    /* Карточки */
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      height: 180px;
+      width: 100%;
+      background: #2c2c2e;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    .content {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .title {
+      font-size: 19px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .meta-info {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--sec-text);
+    }
+
+    .description {
+      font-size: 14px;
+      color: var(--sec-text);
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    /* Выпадающий детализированный маршрут */
+    details {
+      background: var(--card-sub-bg);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 4px;
+    }
+
+    summary {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--accent-color);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "＋";
+      font-size: 16px;
+    }
+
+    details[open] summary::after {
+      content: "－";
+    }
+
+    .route-steps {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-left: 2px solid rgba(255, 255, 255, 0.15);
+      padding-left: 14px;
+      margin-left: 4px;
+    }
+
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .step-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: var(--sec-text);
+      line-height: 1.3;
+    }
+
+    .step-img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-top: 6px;
+    }
+
+    /* Кнопки */
+    .btn {
+      margin-top: 6px;
+      background-color: var(--accent-color);
+      color: #000000;
+      text-decoration: none;
+      text-align: center;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 12px;
+      border-radius: 12px;
+      display: block;
+    }
+
+    .btn:active {
+      opacity: 0.8;
+    }
+
+    .btn-sub {
+      background-color: rgba(255,255,255,0.1);
+      color: #fff;
+      font-size: 13px;
+      padding: 8px;
+      margin-top: 4px;
+    }
+  </style>
 </head>
 <body>
 
-    <h1>⛰️ Мои Пешие Маршруты</h1>
+  <header>
+    <h1>Карпаты от Дома</h1>
+    <p class="subtitle">Локация домика: 48.253884, 24.917059</p>
+    
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('routes')">⛰️ Маршруты</button>
+      <button class="tab-btn" onclick="switchTab('activities')">🔥 Активности</button>
+    </div>
+  </header>
 
-    <div class="routes-grid">
-        <!-- Карточка 1 -->
-        <div class="card">
-            <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcS38-ZjHD4L7fM2QR_z77Bgq9dMo32_s8HTrh3gSIQ1DsXIGs8QaFLtj-fdmqpqC1qgCqcgnPsMx72n4uQ" alt="Писаный Камень">
-            <div class="card-content">
-                <h2>Скалы Писаный Камень</h2>
-                <p>Легкий панорамный маршрут к скальному комплексу с древними петроглифами.</p>
-                <a class="btn-maps" href="https://maps.me/route?from=48.175,24.908" target="_blank">Открыть в MAPS.ME</a>
-            </div>
-        </div>
+  <!-- СЕКЦИЯ 1: ПЕШИЕ МАРШРУТЫ -->
+  <div id="routes" class="section active">
 
-        <!-- Карточка 2 -->
-        <div class="card">
-            <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcS-Nh65JAXPon63S2_YtuLbpUXmm83srEMSS0-9-kdJnoCALBIBF_Lx6-YC1MOjRjtWftJhwN6Z165HhkY" alt="Хребет Игрец">
-            <div class="card-content">
-                <h2>Хребет Игрец</h2>
-                <p>Живописный хребет с отличным видом на Черногору и полонины.</p>
-                <a class="btn-maps" href="https://maps.me/route?from=48.150,24.820" target="_blank">Открыть в MAPS.ME</a>
-            </div>
+    <!-- Маршрут 1 -->
+    <div class="card">
+      <div class="card-img-wrap">
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Писаный Камень">
+        <div class="badge">📍 10 км | ~4.5 часа</div>
+      </div>
+      <div class="content">
+        <h2 class="title">Скала Писаный Камень</h2>
+        <div class="meta-info">
+          <span>Сложность: Средняя</span>
+          <span>Набор высоты: +380 м</span>
         </div>
+        <p class="description">Легендарные скалы с древнейшими наскальными символами и лучшей панорамой на Верховинский край.</p>
 
-        <!-- Карточка 3 -->
-        <div class="card">
-            <img src="https://turua.com.ua/wp-content/uploads/carpathians-view-800x600.jpg" alt="Кривопольский перевал">
-            <div class="card-content">
-                <h2>Кривопольский перевал</h2>
-                <p>Простой маршрут вдоль полонин с выходом на обзорную площадку.</p>
-                <a class="btn-maps" href="https://maps.me/route?from=48.200,24.700" target="_blank">Открыть в MAPS.ME</a>
+        <!-- Разворачиваемый лучший маршрут -->
+        <details>
+          <summary>Пошаговый лучший маршрут</summary>
+          <div class="route-steps">
+            <div class="step-item">
+              <span class="step-title">Точка 1: Выход от домика (48.2538, 24.9170)</span>
+              <span class="step-desc">Старт по грунтовой дороге в сторону Буковецкого перевала.</span>
             </div>
-        </div>
+            <div class="step-item">
+              <span class="step-title">Точка 2: Буковецкий перевал (835 м)</span>
+              <span class="step-desc">Здесь можно сделать перерыв, купить карпатского чая у местных.</span>
+              <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" class="step-img" alt="Перевал">
+              <a href="mapsme://map?ll=48.2078,24.9611&n=Буковецкий%20перевал" class="btn btn-sub">Точка в MAPS.ME</a>
+            </div>
+            <div class="step-item">
+              <span class="step-title">Точка 3: Скальный комплекс Писаный Камень</span>
+              <span class="step-desc">Финишная вершина. Валуны высотой 20 м. Идеальное место для пикника.</span>
+              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" class="step-img" alt="Писаный Камень">
+            </div>
+          </div>
+        </details>
+
+        <a href="mapsme://map?ll=48.1818,24.9792&n=Писаный%20Камень" class="btn">Открыть маршрут в MAPS.ME</a>
+      </div>
     </div>
 
+    <!-- Маршрут 2 -->
+    <div class="card">
+      <div class="card-img-wrap">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Хребет Игрец">
+        <div class="badge">📍 8 км | ~3.5 часа</div>
+      </div>
+      <div class="content">
+        <h2 class="title">Хребет Игрец</h2>
+        <div class="meta-info">
+          <span>Сложность: Легкая</span>
+          <span>Набор высоты: +250 м</span>
+        </div>
+        <p class="description">Уединенный пологий хребет с пастушьими полонинами и открытым видом на массив Черногора.</p>
+
+        <details>
+          <summary>Пошаговый лучший маршрут</summary>
+          <div class="route-steps">
+            <div class="step-item">
+              <span class="step-title">Точка 1: Подъем через хвойный лес</span>
+              <span class="step-desc">Пологий трофи-путь через сосновый бор сразу за домиком.</span>
+            </div>
+            <div class="step-item">
+              <span class="step-title">Точка 2: Гуцульская Полонина</span>
+              <span class="step-desc">Летом здесь можно попробовать свежую брынзу и будз прямо у пастухов.</span>
+            </div>
+            <div class="step-item">
+              <span class="step-title">Точка 3: Вершина Игрец (1311 м)</span>
+              <span class="step-desc">360° обзор на Говерлу и Петрос.</span>
+            </div>
+          </div>
+        </details>
+
+        <a href="mapsme://map?ll=48.2056,24.8450&n=Хребет%20Игрец" class="btn">Открыть маршрут в MAPS.ME</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- СЕКЦИЯ 2: АКТИВНОСТИ ПОБЛИЗОСТИ -->
+  <div id="activities" class="section">
+
+    <!-- Активность 1 -->
+    <div class="card">
+      <div class="card-img-wrap">
+        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Гуцульские Чаны">
+        <div class="badge">🚗 15 мин на авто</div>
+      </div>
+      <div class="content">
+        <h2 class="title">Карпатские Чаны на травах</h2>
+        <p class="description">Купание в чугунных чанах на открытом воздухе с водой, заваренной на горной хвои и карпатских травах, с погружением в холодную реку.</p>
+        <a href="mapsme://map?ll=48.2480,24.8990&n=Гуцульские%20Чаны" class="btn">Локация в MAPS.ME</a>
+      </div>
+    </div>
+
+    <!-- Активность 2 -->
+    <div class="card">
+      <div class="card-img-wrap">
+        <img src="https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&w=800&q=80" alt="Рафтинг">
+        <div class="badge">🚗 20 мин на авто</div>
+      </div>
+      <div class="content">
+        <h2 class="title">Рафтинг по Чёрному Черемошу</h2>
+        <p class="description">Сплавы на рафтах и байдарках по порогам горной реки. Доступно как для новичков, так и для любителей экстрима.</p>
+        <a href="mapsme://map?ll=48.1620,24.8230&n=Рафтинг%20Черемош" class="btn">Локация в MAPS.ME</a>
+      </div>
+    </div>
+
+    <!-- Активность 3 -->
+    <div class="card">
+      <div class="card-img-wrap">
+        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Музеи">
+        <div class="badge">📍 В Верховине</div>
+      </div>
+      <div class="content">
+        <h2 class="title">Музей Магии и Гуцульщины</h2>
+        <p class="description">Аутентичные колоритные музеи с дегустацией настоек, игре на трембите и историями про мольфаров.</p>
+        <a href="mapsme://map?ll=48.2520,24.8310&n=Музей%20Верховина" class="btn">Локация в MAPS.ME</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function switchTab(tabName) {
+      // Переключение закладок
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+
+      if (tabName === 'routes') {
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.getElementById('routes').classList.add('active');
+      } else {
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        document.getElementById('activities').classList.add('active');
+      }
+    }
+  </script>
 </body>
 </html>
