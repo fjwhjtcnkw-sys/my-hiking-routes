@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Карпаты 7Д Офлайн</title>
+  <title>Красивые места Карпат</title>
 
   <!-- PWA настройки -->
   <link rel="manifest" href="manifest.json">
@@ -37,41 +37,17 @@
     }
 
     header { padding: 10px 4px 16px 4px; }
-    h1 { font-size: 26px; font-weight: 800; margin: 0 0 4px 0; }
+    h1 { font-size: 24px; font-weight: 800; margin: 0 0 4px 0; }
     .subtitle { font-size: 13px; color: var(--sec-text); margin: 0 0 16px 0; }
 
     #map {
       width: 100%;
-      height: 260px;
+      height: 250px;
       border-radius: 16px;
       margin-bottom: 16px;
       border: 1px solid rgba(255, 255, 255, 0.15);
       z-index: 1;
     }
-
-    .tabs {
-      display: flex;
-      background: var(--card-bg);
-      padding: 4px;
-      border-radius: 12px;
-      margin-bottom: 16px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .tab-btn {
-      flex: 1;
-      padding: 10px;
-      text-align: center;
-      font-weight: 600;
-      font-size: 13px;
-      border-radius: 8px;
-      background: transparent;
-      color: var(--sec-text);
-      border: none;
-      cursor: pointer;
-    }
-
-    .tab-btn.active { background: #3a3a3c; color: #fff; }
 
     .day-picker {
       display: flex;
@@ -101,8 +77,7 @@
       border-color: var(--accent-color);
     }
 
-    .section { display: none; flex-direction: column; gap: 16px; }
-    .section.active { display: flex; }
+    .section { display: flex; flex-direction: column; gap: 16px; }
 
     .card {
       background-color: var(--card-bg);
@@ -111,7 +86,7 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .card-img-wrap { position: relative; height: 160px; width: 100%; background: #2c2c2e; }
+    .card-img-wrap { position: relative; height: 170px; width: 100%; background: #2c2c2e; }
     .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
 
     .badge {
@@ -124,6 +99,18 @@
       position: absolute; top: 10px; left: 10px;
       background: var(--accent-color); color: #000;
       font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 12px;
+    }
+
+    .road-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(48, 209, 88, 0.15);
+      color: var(--accent-color);
+      margin-bottom: 4px;
+      width: fit-content;
     }
 
     .content { padding: 14px; display: flex; flex-direction: column; gap: 8px; }
@@ -155,19 +142,15 @@
 <body>
 
   <header>
-    <h1>🌲 Карпаты: Офлайн-Гид</h1>
+    <h1>🏔️ Красивые Места Карпат</h1>
     <p class="subtitle">База: Домик (48.253884, 24.917059)</p>
 
     <!-- ИНТЕРАКТИВНАЯ КАРТА -->
     <div id="map"></div>
 
-    <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('routes')">⛰️ Маршруты (7 Дней)</button>
-      <button class="tab-btn" onclick="switchTab('activities')">🔥 Активности</button>
-    </div>
-
+    <!-- Фильтр по дням -->
     <div id="day-filter" class="day-picker">
-      <button class="day-chip active" onclick="filterDay('all')">Все 7 дней</button>
+      <button class="day-chip active" onclick="filterDay('all')">Все 7 мест</button>
       <button class="day-chip" onclick="filterDay('1')">1</button>
       <button class="day-chip" onclick="filterDay('2')">2</button>
       <button class="day-chip" onclick="filterDay('3')">3</button>
@@ -178,158 +161,144 @@
     </div>
   </header>
 
-  <!-- МАРШРУТЫ -->
-  <div id="routes" class="section active">
+  <!-- ЛОКАЦИИ -->
+  <div id="routes" class="section">
 
+    <!-- Локация 1 -->
     <div class="card route-card" data-day="1">
       <div class="card-img-wrap">
         <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Писаный Камень">
         <div class="day-tag">ДЕНЬ 1</div>
-        <div class="badge">📍 10 км | ~4.5 ч</div>
+        <div class="badge">📍 Пешком 10 км</div>
       </div>
       <div class="content">
+        <span class="road-tag">🚶 ПЕШКОМ ОТ ДОМА</span>
         <h2 class="title">Скалы Писаный Камень</h2>
-        <div class="meta-info"><span>Легкая</span><span>+380 м</span></div>
-        <p class="description">Легендарные древние валуны и отличный обзорный вид.</p>
+        <div class="meta-info"><span>Древнее святилище</span><span>Панорама 360°</span></div>
+        <p class="description">Гигантские 20-метровые скальные валуны на вершине хребта с наскальными знаками и видом на весь Верховинский край.</p>
         <details>
-          <summary>Детали маршрута</summary>
+          <summary>Что посмотреть</summary>
           <div class="route-steps">
-            <div><div class="step-title">1. Выход от домика</div><div class="step-desc">Пешком через Буковецкий перевал.</div></div>
-            <div><div class="step-title">2. Скальный комплекс</div><div class="step-desc">Огромные 20-метровые скалы и место для пикника.</div></div>
+            <div><div class="step-title">1. Буковецкий перевал</div><div class="step-desc">Живописный старт пешего маршрута.</div></div>
+            <div><div class="step-title">2. Каменные чаши</div><div class="step-desc">Загадочные углубления на вершине скал.</div></div>
           </div>
         </details>
         <a href="mapsme://map?ll=48.1818,24.9792&n=Писаный%20Камень" class="btn">Открыть в MAPS.ME</a>
       </div>
     </div>
 
+    <!-- Локация 2 -->
     <div class="card route-card" data-day="2">
       <div class="card-img-wrap">
         <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Игрец">
         <div class="day-tag">ДЕНЬ 2</div>
-        <div class="badge">📍 9 км | ~4 ч</div>
+        <div class="badge">📍 Пешком 9 км</div>
       </div>
       <div class="content">
-        <h2 class="title">Хребет Игрец & Сыроварня</h2>
-        <div class="meta-info"><span>Средняя</span><span>+450 м</span></div>
-        <p class="description">Прогулка по открытому хребту и заход к пастухам за свежим сыром.</p>
+        <span class="road-tag">🚶 ПЕШКОМ ОТ ДОМА</span>
+        <h2 class="title">Хребет Игрец (1311 м)</h2>
+        <div class="meta-info"><span>Открытый хребет</span><span>Вид на Черногору</span></div>
+        <p class="description">Панорамный хребет с просторными карпатскими полонинами, откуда открывается вид на Говерлу и Петрос.</p>
         <a href="mapsme://map?ll=48.2056,24.8450&n=Хребет%20Игрец" class="btn">Открыть в MAPS.ME</a>
       </div>
     </div>
 
+    <!-- Локация 3 -->
     <div class="card route-card" data-day="3">
       <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80" alt="Маричейка">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Кривопольский">
         <div class="day-tag">ДЕНЬ 3</div>
-        <div class="badge">🚗+🚶 12 км | ~6 ч</div>
+        <div class="badge">🚗 Авто 35 км + 🚶 4 км</div>
       </div>
       <div class="content">
-        <h2 class="title">Озеро Маричейка</h2>
-        <div class="meta-info"><span>Высокая</span><span>Высокогорное</span></div>
-        <p class="description">Выезд в Шибене и поход к ледниковому озеру в еловом лесу.</p>
-        <a href="mapsme://map?ll=48.0736,24.6366&n=Озеро%20Маричейка" class="btn">Открыть в MAPS.ME</a>
-      </div>
-    </div>
-
-    <div class="card route-card" data-day="4">
-      <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Чаны">
-        <div class="day-tag">ДЕНЬ 4</div>
-        <div class="badge">🧘 Отдых</div>
-      </div>
-      <div class="content">
-        <h2 class="title">Верховина & Карпатские Чаны</h2>
-        <p class="description">Разгрузочный день: музеи, местная кухня и купание в чанах.</p>
-        <a href="mapsme://map?ll=48.2480,24.8990&n=Чаны" class="btn">Открыть в MAPS.ME</a>
-      </div>
-    </div>
-
-    <div class="card route-card" data-day="5">
-      <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Смотрич">
-        <div class="day-tag">ДЕНЬ 5</div>
-        <div class="badge">🚗+🚶 14 км | ~7 ч</div>
-      </div>
-      <div class="content">
-        <h2 class="title">Гора Смотрич (1898 м)</h2>
-        <div class="meta-info"><span>Сложная</span><span>Скалы</span></div>
-        <p class="description">Восхождение через водопады и скалы «Вухатый Камень».</p>
-        <a href="mapsme://map?ll=48.1060,24.6290&n=Гора%20Смотрич" class="btn">Открыть в MAPS.ME</a>
-      </div>
-    </div>
-
-    <div class="card route-card" data-day="6">
-      <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&w=800&q=80" alt="Рафтинг">
-        <div class="day-tag">ДЕНЬ 6</div>
-        <div class="badge">🌊 Водный спорт</div>
-      </div>
-      <div class="content">
-        <h2 class="title">Рафтинг по Чёрному Черемошу</h2>
-        <p class="description">Сплав на рафтах по порогам реки с инструктором.</p>
-        <a href="mapsme://map?ll=48.1620,24.8230&n=Рафтинг" class="btn">Открыть в MAPS.ME</a>
-      </div>
-    </div>
-
-    <div class="card route-card" data-day="7">
-      <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Кривополье">
-        <div class="day-tag">ДЕНЬ 7</div>
-        <div class="badge">📍 6 км | ~3 ч</div>
-      </div>
-      <div class="content">
-        <h2 class="title">Кривопольский Перевал</h2>
-        <p class="description">Простой и уютный панорамный маршрут для пикника.</p>
+        <span class="road-tag">🛣️ ИДЕАЛЬНЫЙ АСФАЛЬТ (Р-24)</span>
+        <h2 class="title">Кривопольский Перевал (961 м)</h2>
+        <div class="meta-info"><span>Высокогорный перевал</span><span>Сосновый лес</span></div>
+        <p class="description">Один из самых высоких перевалов Карпат. Ровный подъезд по асфальту, парковка у трассы и прогулка по открытому хребту.</p>
         <a href="mapsme://map?ll=48.2000,24.7000&n=Кривопольский%20перевал" class="btn">Открыть в MAPS.ME</a>
       </div>
     </div>
 
-  </div>
+    <!-- Локация 4 -->
+    <div class="card route-card" data-day="4">
+      <div class="card-img-wrap">
+        <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80" alt="Шешоры">
+        <div class="day-tag">ДЕНЬ 4</div>
+        <div class="badge">🚗 Авто 28 км</div>
+      </div>
+      <div class="content">
+        <span class="road-tag">🛣️ ХОРОШИЙ АСФАЛЬТ</span>
+        <h2 class="title">Шешорские Сребристые Водопады</h2>
+        <div class="meta-info"><span>Горная река</span><span>Скальные каскады</span></div>
+        <p class="description">Живописные каскадные водопады (Большой и Малый Гук) на реке Пистынька. Удобный подъезд и места для отдыха у воды.</p>
+        <a href="mapsme://map?ll=48.3351,24.9894&n=Шешорские%20водопады" class="btn">Открыть в MAPS.ME</a>
+      </div>
+    </div>
 
-  <!-- АКТИВНОСТИ -->
-  <div id="activities" class="section">
-    <div class="card">
+    <!-- Локация 5 -->
+    <div class="card route-card" data-day="5">
+      <div class="card-img-wrap">
+        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Виадук Ворохта">
+        <div class="day-tag">ДЕНЬ 5</div>
+        <div class="badge">🚗 Авто 30 км</div>
+      </div>
       <div class="content">
-        <h2 class="title">♨️ Карпатские Чаны</h2>
-        <p class="description">Купание над рекой Черемош. Бронировать за день.</p>
-        <a href="mapsme://map?ll=48.2480,24.8990&n=Чаны" class="btn">В MAPS.ME</a>
+        <span class="road-tag">🛣️ ГЛАДКИЙ АСФАЛЬТ</span>
+        <h2 class="title">Австрийские Арочные Виадуки (Ворохта)</h2>
+        <div class="meta-info"><span>Архитектура 1895 г.</span><span>Каменный мост</span></div>
+        <p class="description">Столетние стометровые каменные мосты австро-венгерской эпохи среди карпатских холмов. Парковка прямо у моста.</p>
+        <a href="mapsme://map?ll=48.2825,24.5627&n=Виадук%20Ворохта" class="btn">Открыть в MAPS.ME</a>
       </div>
     </div>
-    <div class="card">
+
+    <!-- Локация 6 -->
+    <div class="card route-card" data-day="6">
+      <div class="card-img-wrap">
+        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Смотрич взгляд">
+        <div class="day-tag">ДЕНЬ 6</div>
+        <div class="badge">🚗 Авто 18 км + 🚶 3 км</div>
+      </div>
       <div class="content">
-        <h2 class="title">🍖 Колыба «Згарда»</h2>
-        <p class="description">Традиционная кухня: бануш, форель, грибная юшка.</p>
-        <a href="mapsme://map?ll=48.2430,24.8350&n=Колыба%20Згарда" class="btn">В MAPS.ME</a>
+        <span class="road-tag">🛣️ АСФАЛЬТ ДО СТАРТА</span>
+        <h2 class="title">Ущелье Реки Чёрный Черемош</h2>
+        <div class="meta-info"><span>Каньон реки</span><span>Скалистые берега</span></div>
+        <p class="description">Живописная горная долина вдоль бурной реки с высокими скальными обрывами и подвесными мостиками.</p>
+        <a href="mapsme://map?ll=48.1620,24.8230&n=Чёрный%20Черемош" class="btn">Открыть в MAPS.ME</a>
       </div>
     </div>
+
+    <!-- Локация 7 -->
+    <div class="card route-card" data-day="7">
+      <div class="card-img-wrap">
+        <img src="https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&w=800&q=80" alt="Яремче">
+        <div class="day-tag">ДЕНЬ 7</div>
+        <div class="badge">🚗 Авто 55 км</div>
+      </div>
+      <div class="content">
+        <span class="road-tag">🛣️ ТРАССА ЕВРО-УРОВНЯ (Н-09)</span>
+        <h2 class="title">Водопад Пробий & Каньон (Яремче)</h2>
+        <div class="meta-info"><span>Мощный водопад</span><span>Заповедник</span></div>
+        <p class="description">Полноводный 8-метровый водопад с пешеходным мостом над бурлящим каньоном. Удобная асфальтированная парковка.</p>
+        <a href="mapsme://map?ll=48.4392,24.5397&n=Водопад%20Пробий" class="btn">Открыть в MAPS.ME</a>
+      </div>
+    </div>
+
   </div>
 
   <script>
-    // 1. Инициализация офлайн-карты
+    // Картографические метки красивых мест
     const home = [48.253884, 24.917059];
     const map = L.map('map').setView(home, 10);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(map);
 
     L.marker(home).addTo(map).bindPopup('<b>🏡 Домик</b>').openPopup();
-    L.marker([48.1818, 24.9792]).addTo(map).bindPopup('Писаный Камень');
+    L.marker([48.1818, 24.9792]).addTo(map).bindPopup('Скалы Писаный Камень');
     L.marker([48.2056, 24.8450]).addTo(map).bindPopup('Хребет Игрец');
-    L.marker([48.0736, 24.6366]).addTo(map).bindPopup('Озеро Маричейка');
-    L.marker([48.1060, 24.6290]).addTo(map).bindPopup('Гора Смотрич');
-
-    // 2. Табы и фильтры
-    function switchTab(tab) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      if (tab === 'routes') {
-        document.querySelectorAll('.tab-btn')[0].classList.add('active');
-        document.getElementById('routes').classList.add('active');
-        document.getElementById('day-filter').style.display = 'flex';
-      } else {
-        document.querySelectorAll('.tab-btn')[1].classList.add('active');
-        document.getElementById('activities').classList.add('active');
-        document.getElementById('day-filter').style.display = 'none';
-      }
-    }
+    L.marker([48.2000, 24.7000]).addTo(map).bindPopup('Кривопольский Перевал');
+    L.marker([48.3351, 24.9894]).addTo(map).bindPopup('Шешорские Водопады');
+    L.marker([48.2825, 24.5627]).addTo(map).bindPopup('Виадук Ворохта');
+    L.marker([48.4392, 24.5397]).addTo(map).bindPopup('Водопад Пробий');
 
     function filterDay(day) {
       document.querySelectorAll('.day-chip').forEach(c => c.classList.remove('active'));
@@ -339,7 +308,6 @@
       });
     }
 
-    // 3. Регистрация Service Worker для ОФЛАЙН работы
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js');
