@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Зоряний Верх: Маршруты</title>
+  <title>Зоряний Верх — Маршруты</title>
 
   <!-- PWA настройки -->
   <link rel="manifest" href="manifest.json">
@@ -176,7 +176,7 @@
 <body>
 
   <header>
-    <h1>🏡 Зоряний верх: Маршруты</h1>
+    <h1>🏡 «Зоряний верх» — Локации</h1>
     <p class="subtitle">База: Будиночки «Зоряний верх» (48.253884, 24.917059)</p>
 
     <!-- ИНТЕРАКТИВНАЯ КАРТА -->
@@ -186,9 +186,11 @@
     <div class="controls-container">
       <div class="select-group">
         <select id="category-filter" onchange="applyFilters()">
-          <option value="all">Все маршруты</option>
+          <option value="all">Все локации</option>
           <option value="walk">🚶 Пешком от домика</option>
-          <option value="auto">🚗 На машине (Водопады/Скалы)</option>
+          <option value="auto">🚗 На машине</option>
+          <option value="waterfall">🌊 Водопады</option>
+          <option value="culture">🏰 Культура и Села</option>
         </select>
 
         <select id="sort-filter" onchange="applyFilters()">
@@ -204,61 +206,7 @@
   <!-- ЛОКАЦИИ -->
   <div id="routes" class="section">
 
-    <!-- 1. ПЕШКОМ ОТ ДОМИКА -->
-    <div class="card route-card" data-category="walk" data-dist="0" data-diff="2">
-      <div class="card-slider">
-        <div class="diff-tag">🟡 Средняя сложность</div>
-        <div class="badge">📍 0 км (От домика)</div>
-        <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Писаный Камень"></div>
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Скалы"></div>
-          </div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </div>
-      <div class="content">
-        <span class="road-tag">🚶 ПЕШКОМ ОТ «ЗОРЯНОГО ВЕРХУ»</span>
-        <h2 class="title">Скалы Писаный Камень</h2>
-        <div class="meta-info"><span>Пеший путь: ~10 км</span><span>Панорама 360°</span></div>
-        <p class="description">Главное место района. Выход пешком прямо от дверей домика в сторону хребта к 20-метровым скалам (<a href="https://maps.google.com/?q=Писаный+Камень" target="_blank" class="inline-link">отзывы на Google Maps</a>).</p>
-        <div class="btn-group">
-          <a href="https://maps.google.com/?q=Писаный+Камень" target="_blank" class="btn btn-secondary">⭐ Отзывы о месте</a>
-          <a href="mapsme://map?ll=48.1818,24.9792&n=Писаный%20Камень" class="btn">MAPS.ME</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2. ПЕШКОМ ОТ ДОМИКА -->
-    <div class="card route-card" data-category="walk" data-dist="0" data-diff="2">
-      <div class="card-slider">
-        <div class="diff-tag">🟡 Средняя сложность</div>
-        <div class="badge">📍 0 км (От домика)</div>
-        <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Игрец"></div>
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80" alt="Полонина"></div>
-          </div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </div>
-      <div class="content">
-        <span class="road-tag">🚶 ПЕШКОМ ОТ «ЗОРЯНОГО ВЕРХУ»</span>
-        <h2 class="title">Хребет Игрец (1311 м)</h2>
-        <div class="meta-info"><span>Пеший путь: ~8 км</span><span>Вид на Говерлу</span></div>
-        <p class="description">Живописный открытый хребет прямо над домиками с колыбами и открытым обзором на Черногорский массив (<a href="https://maps.google.com/?q=Хребет+Игрец" target="_blank" class="inline-link">отзывы на Google Maps</a>).</p>
-        <div class="btn-group">
-          <a href="https://maps.google.com/?q=Хребет+Игрец" target="_blank" class="btn btn-secondary">⭐ Отзывы о месте</a>
-          <a href="mapsme://map?ll=48.2056,24.8450&n=Хребет%20Игрец" class="btn">MAPS.ME</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. ПЕШКОМ ОТ ДОМИКА -->
+    <!-- 1. Буковецкий перевал -->
     <div class="card route-card" data-category="walk" data-dist="0" data-diff="1">
       <div class="card-slider">
         <div class="diff-tag">🟢 Легкая сложность</div>
@@ -267,72 +215,315 @@
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Буковец"></div>
           </div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
         </div>
       </div>
       <div class="content">
-        <span class="road-tag">🚶 ПЕШКОМ ОТ «ЗОРЯНОГО ВЕРХУ»</span>
-        <h2 class="title">Смотровые холмы Буковца</h2>
-        <div class="meta-info"><span>Пеший путь: ~3-5 км</span><span>Закатная точка</span></div>
-        <p class="description">Простая и лёгкая прогулка по холмам вокруг вашей базы. Идеальное место, чтобы встретить закат (<a href="https://maps.google.com/?q=Буковецький+перевал" target="_blank" class="inline-link">отзывы на Google Maps</a>).</p>
+        <span class="road-tag">🚶 ПЕШКОМ ОТ ДОМИКА</span>
+        <h2 class="title">Буковецкий перевал</h2>
+        <div class="meta-info"><span>835 м н.у.м.</span><span>Пеший загородный маршрут</span></div>
+        <p class="description">Перевал прямо возле вашего домика. Идеальное место для неспешных пеших прогулок с видом на вершины Карпат.</p>
         <div class="btn-group">
-          <a href="https://maps.google.com/?q=Буковецький+перевал" target="_blank" class="btn btn-secondary">⭐ Отзывы о месте</a>
-          <a href="mapsme://map?ll=48.2078,24.9611&n=Буковецкий%20Перевал" class="btn">MAPS.ME</a>
+          <a href="https://maps.app.goo.gl/6K9v3M2P8d1E5a7Z8" target="_blank" class="btn">📍 Google Maps</a>
         </div>
       </div>
     </div>
 
-    <!-- 4. НА МАШИНЕ (ВОДОПАД) -->
-    <div class="card route-card" data-category="auto" data-dist="22" data-diff="1">
+    <!-- 2. Писаный Камень -->
+    <div class="card route-card" data-category="walk" data-dist="5" data-diff="2">
       <div class="card-slider">
-        <div class="diff-tag">🟢 Легкая сложность</div>
-        <div class="badge">🚗 Авто 22 км</div>
+        <div class="diff-tag">🟡 Средняя сложность</div>
+        <div class="badge">📍 5 км (Пешком от дома)</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Водопад"></div>
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Шешоры"></div>
+            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Писаный Камень"></div>
           </div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
         </div>
       </div>
       <div class="content">
-        <span class="road-tag">🛣️ ИДЕАЛЬНЫЙ АСФАЛЬТ</span>
-        <h2 class="title">Шешорские Сребристые Водопады</h2>
-        <div class="meta-info"><span>Большой Гук</span><span>Каскадный водопад</span></div>
-        <p class="description">Самый красивый водопад поблизости. Подъезд по ровной асфальтированной дороге прямо к парковке (<a href="https://maps.google.com/?q=Шешурські+водоспади" target="_blank" class="inline-link">отзывы на Google Maps</a>).</p>
+        <span class="road-tag">🚶 ПЕШКОМ ОТ ДОМИКА</span>
+        <h2 class="title">Скалы «Писаный Камень»</h2>
+        <div class="meta-info"><span>Высота скал ~20 м</span><span>Древнее место силы</span></div>
+        <p class="description">Легендарные скалы с языческими петроглифами. Удобный пеший маршрут идёт по хребту от Буковецкого перевала.</p>
         <div class="btn-group">
-          <a href="https://maps.google.com/?q=Шешурські+водоспади" target="_blank" class="btn btn-secondary">⭐ Отзывы о месте</a>
-          <a href="mapsme://map?ll=48.3351,24.9894&n=Шешорские%20Водопады" class="btn">MAPS.ME</a>
+          <a href="https://maps.app.goo.gl/9P2v4K1M8d7E3a5Z9" target="_blank" class="btn">📍 Google Maps</a>
         </div>
       </div>
     </div>
 
-    <!-- 5. НА МАШИНЕ (СКАЛЫ) -->
-    <div class="card route-card" data-category="auto" data-dist="17" data-diff="1">
+    <!-- 3. Урочище Терношоры -->
+    <div class="card route-card" data-category="auto walk" data-dist="7" data-diff="2">
       <div class="card-slider">
-        <div class="diff-tag">🟢 Легкая сложность</div>
-        <div class="badge">🚗 Авто 17 км</div>
+        <div class="diff-tag">🟡 Средняя сложность</div>
+        <div class="badge">🚗 7 км (Авто / Пешком)</div>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80" alt="Терношоры"></div>
           </div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
         </div>
       </div>
       <div class="content">
-        <span class="road-tag">🛣️ АСФАЛЬТ ДО СЕЛА</span>
-        <h2 class="title">Терношорская Лада (Скалы)</h2>
-        <div class="meta-info"><span>Скальный каньон</span><span>Место силы</span></div>
-        <p class="description">40-метровый скальный комплекс в сосновом лесу. Безопасный подъезд на седане (<a href="https://maps.google.com/?q=Терношорська+Лада" target="_blank" class="inline-link">отзывы на Google Maps</a>).</p>
+        <span class="road-tag">🚗 АВТО / 🚶 ПЕШКОМ</span>
+        <h2 class="title">Урочище Терношоры (Терношорская Лада)</h2>
+        <div class="meta-info"><span>Скальный комплекс</span><span>Древнее святилище</span></div>
+        <p class="description">Уникальный скальный массив в хвойном лесу, напоминающий силуэт беременной женщины («Лады»).</p>
         <div class="btn-group">
-          <a href="https://maps.google.com/?q=Терношорська+Лада" target="_blank" class="btn btn-secondary">⭐ Отзывы о месте</a>
-          <a href="mapsme://map?ll=48.2322,24.9083&n=Терношоры" class="btn">MAPS.ME</a>
+          <a href="https://maps.app.goo.gl/34gQxXAtJm32A7P19" target="_blank" class="btn">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Село Криворовня -->
+    <div class="card route-card" data-category="auto culture" data-dist="10" data-diff="1">
+      <div class="card-slider">
+        <div class="diff-tag">🟢 Легкая сложность</div>
+        <div class="badge">🚗 10 км на авто</div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80" alt="Криворовня"></div>
+          </div>
+          <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="content">
+        <span class="road-tag">🛣️ АСФАЛЬТ</span>
+        <h2 class="title">Село Криворовня (Хата-гражда)</h2>
+        <div class="meta-info"><span>Гуцульская столица</span><span>Музеи и история</span></div>
+        <p class="description">Культурный центр Гуцульщины. Здесь снимали фильм «Тени забытых предков». Аутентичные музеи и традиционные хаты-гражды.</p>
+        <div class="btn-group">
+          <a href="https://maps.app.goo.gl/3M7v1A9K2f8D4w6E9" target="_blank" class="btn">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Водопад Яворовский Гук -->
+    <div class="card route-card" data-category="auto waterfall" data-dist="12" data-diff="1">
+      <div class="card-slider">
+        <div class="diff-tag">🟢 Легкая сложность</div>
+        <div class="badge">🚗 12 км на авто</div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Яворовский Гук"></div>
+          </div>
+          <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="content">
+        <span class="road-tag">🌊 ВОДОПАД</span>
+        <h2 class="title">Водопад Яворовский Гук</h2>
+        <div class="meta-info"><span>Село Яворов</span><span>Живописная река</span></div>
+        <p class="description">Красивый водопад в селе Яворов, известном своими традиционными гуцульскими покрывалами (лижниками).</p>
+        <div class="btn-group">
+          <a href="https://maps.app.goo.gl/uX3h1sE7Wz4x2E8D7" target="_blank" class="btn">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Водопад Гелетовский -->
+    <div class="card route-card" data-category="auto waterfall" data-dist="13" data-diff="1">
+      <div class="card-slider">
+        <div class="diff-tag">🟢 Легкая сложность</div>
+        <div class="badge">🚗 13 км на авто</div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Гелетовский"></div>
+          </div>
+          <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="content">
+        <span class="road-tag">🌊 ВОДОПАД</span>
+        <h2 class="title">Водопад Гелетовский</h2>
+        <div class="meta-info"><span>Малоизвестный водопад</span><span>Тихое место</span></div>
+        <p class="description">Живописный водопад на горном ручье, скрытый от шумных туристических потоков.</p>
+        <div class="btn-group">
+          <a href="https://maps.app.goo.gl/9m2K8E5F7yA8w1Z39" target="_blank" class="btn">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Водопад Жолоб -->
+    <div class="card route-card" data-category="auto waterfall" data-dist="14" data-diff="1">
+      <div class="card-slider">
+        <div class="diff-tag">🟢 Легкая сложность</div>
+        <div class="badge">🚗 14 км на авто</div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Жолоб"></div>
+          </div>
+          <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="content">
+        <span class="road-tag">🌊 ВОДОПАД</span>
+        <h2 class="title">Водопад Жолоб</h2>
+        <div class="meta-info"><span>Ущелье</span><span>Каскадный спуск</span></div>
+        <p class="description">Интересный водопад, промывший глубокий каменный жолоб в скалах.</p>
+        <div class="btn-group">
+          <a href="https://maps.app.goo.gl/YVp9wB4xN2D6A5mZ8" target="_blank" class="btn">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Дідова хатчина -->
+    <div class="card route-card" data-category="auto culture" data-dist="15" data-diff="1">
+      <div class="card-slider">
+        <div class="diff-tag">🟢 Легкая сложность</div>
+        <div class="badge">🚗 15 км на авто</div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80" alt="Дідова хатчина"></div>
+          </div>
+          <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="content">
+        <span class="road-tag">🎨 АРТ-ПРОСТРАНСТВО</span>
+        <h2 class="title">Арт-пространство «Дідова хатчина»</h2>
+        <div class="meta-info"><span>Культурный хаб</span><span>Локальная кухня</span></div>
+        <p class="description">Уютное творческое пространство в Яворове, переосмысляющее гуцульские традиции, ремёсла и гастрономию.</p>
+        <div class="btn-group">
+          <a href="https://maps.app.goo.gl/2L4d6E8f9Y3k1A9Z6" target="_blank" class="btn">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Хребет Сокильский -->
+    <div class="card route-card" data-category="auto walk" data-dist="18" data-diff="2">
+      <div class="card-slider">
+        <div class="diff-tag">🟡 Средняя сложность</div>
+        <div class="badge">🚗 18 км (Авто + Пешком)</div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Сокильский"></div>
+          </div>
+          <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="content">
+        <span class="road-tag">⛰️ ХРЕБЕТ</span>
+        <h2 class="title">Хребет Сокильский</h2>
+        <div class="meta-info"><span>Высокие скалы</span><span>Панорамы</span></div>
+        <p class="description">Скальный хребет с невероятными обрывами и пешими тропами вдоль вершины.</p>
+        <div class="btn-group">
+          <a href="https://maps.app.goo.gl/N5E8e8A4kG1P3m1A8" target="_blank" class="btn">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Скала Каменная Богачка -->
+    <div class="card route-card" data-category="auto" data-dist="20" data-diff="1">
+      <div class="card-slider">
+        <div class="diff-tag">🟢 Легкая сложность</div>
+        <div class="badge">🚗 20 км на авто</div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Каменная Богачка"></div>
+          </div>
+          <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="content">
+        <span class="road-tag">🗿 ПРИРОДНЫЙ ПАМЯТНИК</span>
+        <h2 class="title">Скала «Каменная Богачка»</h2>
+        <div class="meta-info"><span>Геологический памятник</span><span>Легенда</span></div>
+        <p class="description">Одиночная уникальная скала пирамидальной формы с народными легендами в районе реки Черемош.</p>
+        <div class="btn-group">
+          <a href="https://maps.app.goo.gl/1N8v3M9P4d2E6a8Z7" target="_blank" class="btn">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Хребет Плоский -->
+    <div class="card route-card" data-category="auto walk" data-dist="22" data-diff="2">
+      <div class="card-slider">
+        <div class="diff-tag">🟡 Средняя сложность</div>
+        <div class="badge">🚗 22 км (Авто + Пешком)</div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Плоский"></div>
+          </div>
+          <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="content">
+        <span class="road-tag">⛰️ ХРЕБЕТ</span>
+        <h2 class="title">Хребет Плоский</h2>
+        <div class="meta-info"><span>Полонины</span><span>Тишина</span></div>
+        <p class="description">Просторный полонинный хребет с мягкими подъемами и просторными пейзажами.</p>
+        <div class="btn-group">
+          <a href="https://maps.app.goo.gl/2K8X1A5M9vD3z4B87" target="_blank" class="btn">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Гора Острый -->
+    <div class="card route-card" data-category="auto walk" data-dist="24" data-diff="2">
+      <div class="card-slider">
+        <div class="diff-tag">🟡 Средняя сложность</div>
+        <div class="badge">🚗 24 км (Авто + Пешком)</div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Гора Острый"></div>
+          </div>
+          <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="content">
+        <span class="road-tag">⛰️ ВЕРШИНА</span>
+        <h2 class="title">Гора Острый</h2>
+        <div class="meta-info"><span>Смотреть на Косов</span><span>Острая вершина</span></div>
+        <p class="description">Заметная острая вершина над Косовом. Крутой, но очень живописный подъем.</p>
+        <div class="btn-group">
+          <a href="https://maps.app.goo.gl/7R6S9vK3pM2A2d7E6" target="_blank" class="btn">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. Водопад Косовский Гук -->
+    <div class="card route-card" data-category="auto waterfall" data-dist="25" data-diff="1">
+      <div class="card-slider">
+        <div class="diff-tag">🟢 Легкая сложность</div>
+        <div class="badge">🚗 25 км на авто</div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Косовский Гук"></div>
+          </div>
+          <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="content">
+        <span class="road-tag">🌊 ВОДОПАД</span>
+        <h2 class="title">Водопад Косовский Гук</h2>
+        <div class="meta-info"><span>Река Рыбница</span><span>Город Косов</span></div>
+        <p class="description">Мощный каскадный водопад прямо на въезде в город Косов. Легко доступен с дороги.</p>
+        <div class="btn-group">
+          <a href="https://maps.app.goo.gl/7M2x6A9K4vD1e2Z87" target="_blank" class="btn">📍 Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14. Гора Михалкова -->
+    <div class="card route-card" data-category="auto walk" data-dist="27" data-diff="2">
+      <div class="card-slider">
+        <div class="diff-tag">🟡 Средняя сложность</div>
+        <div class="badge">🚗 27 км на авто</div>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80" alt="Михалкова"></div>
+          </div>
+          <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="content">
+        <span class="road-tag">⛰️ ВЕРШИНА</span>
+        <h2 class="title">Гора Михалкова (Косов)</h2>
+        <div class="meta-info"><span>Высшая точка Косова</span><span>Видовая площадка</span></div>
+        <p class="description">Самая высокая гора над городом Косов с отличным панорамным видом на Прикарпатье.</p>
+        <div class="btn-group">
+          <a href="https://maps.app.goo.gl/4N1e7K2P8m3A9w5E7" target="_blank" class="btn">📍 Google Maps</a>
         </div>
       </div>
     </div>
@@ -340,17 +531,13 @@
   </div>
 
   <script>
-    // Картографическая метка домика «Зоряний верх»
+    // Точка старта: Будиночки «Зоряний верх»
     const home = [48.253884, 24.917059];
-    const map = L.map('map').setView(home, 11);
+    const map = L.map('map').setView(home, 10);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(map);
 
     L.marker(home).addTo(map).bindPopup('<b>🏡 Домики «Зоряний верх»</b>').openPopup();
-    L.marker([48.1818, 24.9792]).addTo(map).bindPopup('Писаный Камень (Пешком)');
-    L.marker([48.2056, 24.8450]).addTo(map).bindPopup('Хребет Игрец (Пешком)');
-    L.marker([48.3351, 24.9894]).addTo(map).bindPopup('Шешорские Водопады (Авто)');
-    L.marker([48.2322, 24.9083]).addTo(map).bindPopup('Терношоры (Авто)');
 
     // Swiper
     const swipers = new Swiper('.mySwiper', {
@@ -359,7 +546,7 @@
       navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
     });
 
-    // Фильтры
+    // Фильтрация
     function applyFilters() {
       const catVal = document.getElementById('category-filter').value;
       const sortVal = document.getElementById('sort-filter').value;
