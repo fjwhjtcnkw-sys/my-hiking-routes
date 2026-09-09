@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Маршруты от дома</title>
+
+  <!-- Настройки для работы как приложение на iOS (PWA) -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Маршруты">
+
+  <style>
+    :root {
+      --bg-color: #f2f2f7;
+      --card-bg: #ffffff;
+      --text-color: #000000;
+      --sec-text: #8e8e93;
+      --accent-color: #34c759;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #000000;
+        --card-bg: #1c1c1e;
+        --text-color: #ffffff;
+        --sec-text: #8e8e93;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 16px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    header {
+      padding: 20px 8px 12px 8px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .image-container {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background-color: #e5e5ea;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 8px;
+      backdrop-filter: blur(4px);
+    }
+
+    .content {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .description {
+      font-size: 14px;
+      color: var(--sec-text);
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .btn {
+      margin-top: 8px;
+      background-color: var(--accent-color);
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      display: block;
+      transition: opacity 0.2s;
+    }
+
+    .btn:active {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Маршруты от дома</h1>
+  </header>
+
+  <div class="container" id="spots-container"></div>
+
+  <script>
+    const spots = [
+      {
+        title: "Скала Писаный Камень",
+        distance: "~ 10 км от вас",
+        description: "Огромные живописные скалы высотой до 20 м с древними петроглифами. Известное мистическое место с панорамным видом.",
+        image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+        lat: 48.1818,
+        lon: 24.9792
+      },
+      {
+        title: "Хребет Игрец",
+        distance: "~ 8 км от вас",
+        description: "Пологий и живописный хребет с пастушьими полонинами. Прекрасный пеший маршрут с видом на весь Черногорский хребет.",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+        lat: 48.2056,
+        lon: 24.8450
+      },
+      {
+        title: "Кривопольский перевал",
+        distance: "~ 6 км от вас",
+        description: "Один из высочайших перевалов Карпат (961 м). Отличная стартовая точка для несложных прогулок по живописным холмам.",
+        image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
+        lat: 48.2323,
+        lon: 24.8820
+      },
+      {
+        title: "Обзорная вершина в Верховине",
+        distance: "~ 3.5 км от вас",
+        description: "Легкий маршрут от домика через хвойный лес, выходящий на площадку с видом на долину реки Чёрный Черемош.",
+        image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80",
+        lat: 48.2450,
+        lon: 24.9010
+      }
+    ];
+
+    const container = document.getElementById('spots-container');
+
+    spots.forEach(spot => {
+      const mapsMeUrl = `mapsme://map?ll=${spot.lat},${spot.lon}&n=${encodeURIComponent(spot.title)}`;
+      
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="image-container">
+          <img src="${spot.image}" alt="${spot.title}">
+          <div class="badge">${spot.distance}</div>
+        </div>
+        <div class="content">
+          <h2 class="title">${spot.title}</h2>
+          <p class="description">${spot.description}</p>
+          <a href="${mapsMeUrl}" class="btn">Открыть маршрут в MAPS.ME</a>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
