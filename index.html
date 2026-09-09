@@ -37,7 +37,7 @@
     }
 
     header { padding: 10px 4px 16px 4px; }
-    h1 { font-size: 24px; font-weight: 800; margin: 0 0 4px 0; }
+    h1 { font-size: 22px; font-weight: 800; margin: 0 0 4px 0; }
     .subtitle { font-size: 13px; color: var(--sec-text); margin: 0 0 16px 0; }
 
     #map {
@@ -49,32 +49,33 @@
       z-index: 1;
     }
 
-    .day-picker {
+    .controls-container {
       display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 16px;
-      scrollbar-width: none;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
     }
-    .day-picker::-webkit-scrollbar { display: none; }
 
-    .day-chip {
+    .select-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    select {
+      flex: 1;
       background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--sec-text);
-      padding: 8px 14px;
-      border-radius: 20px;
+      color: var(--text-color);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 12px;
+      border-radius: 12px;
       font-size: 13px;
       font-weight: 600;
-      white-space: nowrap;
-      cursor: pointer;
-    }
-
-    .day-chip.active {
-      background: var(--accent-color);
-      color: #000;
-      border-color: var(--accent-color);
+      outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2330d158' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 16px;
     }
 
     .section { display: flex; flex-direction: column; gap: 16px; }
@@ -84,6 +85,8 @@
       border-radius: 18px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
     }
 
     .card-img-wrap { position: relative; height: 170px; width: 100%; background: #2c2c2e; }
@@ -95,10 +98,11 @@
       font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 12px;
     }
 
-    .day-tag {
+    .diff-tag {
       position: absolute; top: 10px; left: 10px;
-      background: var(--accent-color); color: #000;
+      background: var(--card-sub-bg); color: #fff;
       font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .road-tag {
@@ -118,46 +122,49 @@
     .meta-info { display: flex; gap: 10px; font-size: 12px; color: var(--sec-text); }
     .description { font-size: 13px; color: var(--sec-text); line-height: 1.4; margin: 0; }
 
-    details { background: var(--card-sub-bg); border-radius: 10px; padding: 10px; margin-top: 4px; }
-    summary { font-weight: 600; font-size: 13px; color: var(--accent-color); cursor: pointer; list-style: none; display: flex; justify-content: space-between; }
-    summary::-webkit-details-marker { display: none; }
-    summary::after { content: "＋"; }
-    details[open] summary::after { content: "－"; }
-
-    .route-steps {
-      margin-top: 10px; display: flex; flex-direction: column; gap: 10px;
-      border-left: 2px solid rgba(255, 255, 255, 0.15); padding-left: 10px; margin-left: 2px;
-    }
-
-    .step-title { font-size: 13px; font-weight: 600; color: #fff; }
-    .step-desc { font-size: 12px; color: var(--sec-text); }
+    .btn-group { display: flex; gap: 8px; margin-top: 6px; }
 
     .btn {
-      margin-top: 6px; background-color: var(--accent-color); color: #000;
+      flex: 1;
+      background-color: var(--accent-color); color: #000;
       text-decoration: none; text-align: center; font-weight: 700;
-      font-size: 14px; padding: 10px; border-radius: 10px; display: block;
+      font-size: 13px; padding: 10px; border-radius: 10px; display: block;
+    }
+
+    .btn-secondary {
+      background-color: var(--card-sub-bg);
+      color: var(--text-color);
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>🏔️ Красивые Места Карпат</h1>
-    <p class="subtitle">База: Домик (48.253884, 24.917059)</p>
+    <h1>🏔️ Локации до 30 км от Дома</h1>
+    <p class="subtitle">База: Буковец (48.253884, 24.917059)</p>
 
     <!-- ИНТЕРАКТИВНАЯ КАРТА -->
     <div id="map"></div>
 
-    <!-- Фильтр по дням -->
-    <div id="day-filter" class="day-picker">
-      <button class="day-chip active" onclick="filterDay('all')">Все 7 мест</button>
-      <button class="day-chip" onclick="filterDay('1')">1</button>
-      <button class="day-chip" onclick="filterDay('2')">2</button>
-      <button class="day-chip" onclick="filterDay('3')">3</button>
-      <button class="day-chip" onclick="filterDay('4')">4</button>
-      <button class="day-chip" onclick="filterDay('5')">5</button>
-      <button class="day-chip" onclick="filterDay('6')">6</button>
-      <button class="day-chip" onclick="filterDay('7')">7</button>
+    <!-- УПРАВЛЕНИЕ: ФИЛЬТР И СОРТИРОВКА -->
+    <div class="controls-container">
+      <div class="select-group">
+        <select id="category-filter" onchange="applyFilters()">
+          <option value="all">🌲 Все категории</option>
+          <option value="mountains">⛰️ Горы и Хребты</option>
+          <option value="waterfalls">🌊 Водопады и Реки</option>
+          <option value="rocks">🗿 Скалы и Места силы</option>
+          <option value="forests">🌲 Леса и Полонины</option>
+        </select>
+
+        <select id="sort-filter" onchange="applyFilters()">
+          <option value="dist-asc">📏 Сначала ближние</option>
+          <option value="dist-desc">📏 Сначала дальние</option>
+          <option value="diff-asc">🟢 Сначала легкие</option>
+          <option value="diff-desc">🔴 Сначала сложные</option>
+        </select>
+      </div>
     </div>
   </header>
 
@@ -165,147 +172,248 @@
   <div id="routes" class="section">
 
     <!-- Локация 1 -->
-    <div class="card route-card" data-day="1">
+    <div class="card route-card" data-category="rocks" data-dist="0" data-diff="2">
       <div class="card-img-wrap">
         <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Писаный Камень">
-        <div class="day-tag">ДЕНЬ 1</div>
-        <div class="badge">📍 Пешком 10 км</div>
+        <div class="diff-tag">🟡 Средняя сложность</div>
+        <div class="badge">📍 0 км (Пешком)</div>
       </div>
       <div class="content">
         <span class="road-tag">🚶 ПЕШКОМ ОТ ДОМА</span>
         <h2 class="title">Скалы Писаный Камень</h2>
         <div class="meta-info"><span>Древнее святилище</span><span>Панорама 360°</span></div>
         <p class="description">Гигантские 20-метровые скальные валуны на вершине хребта с наскальными знаками и видом на весь Верховинский край.</p>
-        <details>
-          <summary>Что посмотреть</summary>
-          <div class="route-steps">
-            <div><div class="step-title">1. Буковецкий перевал</div><div class="step-desc">Живописный старт пешего маршрута.</div></div>
-            <div><div class="step-title">2. Каменные чаши</div><div class="step-desc">Загадочные углубления на вершине скал.</div></div>
-          </div>
-        </details>
-        <a href="mapsme://map?ll=48.1818,24.9792&n=Писаный%20Камень" class="btn">Открыть в MAPS.ME</a>
+        <div class="btn-group">
+          <a href="https://drymba.net/uk/10344-pysanyy-kamin-skali-bukovets" target="_blank" class="btn btn-secondary">📖 Описание места</a>
+          <a href="mapsme://map?ll=48.1818,24.9792&n=Писаный%20Камень" class="btn">MAPS.ME</a>
+        </div>
       </div>
     </div>
 
     <!-- Локация 2 -->
-    <div class="card route-card" data-day="2">
+    <div class="card route-card" data-category="mountains" data-dist="0" data-diff="2">
       <div class="card-img-wrap">
         <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Игрец">
-        <div class="day-tag">ДЕНЬ 2</div>
-        <div class="badge">📍 Пешком 9 км</div>
+        <div class="diff-tag">🟡 Средняя сложность</div>
+        <div class="badge">📍 0 км (Пешком)</div>
       </div>
       <div class="content">
         <span class="road-tag">🚶 ПЕШКОМ ОТ ДОМА</span>
         <h2 class="title">Хребет Игрец (1311 м)</h2>
         <div class="meta-info"><span>Открытый хребет</span><span>Вид на Черногору</span></div>
-        <p class="description">Панорамный хребет с просторными карпатскими полонинами, откуда открывается вид на Говерлу и Петрос.</p>
-        <a href="mapsme://map?ll=48.2056,24.8450&n=Хребет%20Игрец" class="btn">Открыть в MAPS.ME</a>
+        <p class="description">Панорамный хребет прямо над домом с просторными карпатскими полонинами и открытым видом на Говерлу и Петрос.</p>
+        <div class="btn-group">
+          <a href="https://drymba.net/uk/10356-ihrets-khrebet-bukovets" target="_blank" class="btn btn-secondary">📖 Описание места</a>
+          <a href="mapsme://map?ll=48.2056,24.8450&n=Хребет%20Игрец" class="btn">MAPS.ME</a>
+        </div>
       </div>
     </div>
 
     <!-- Локация 3 -->
-    <div class="card route-card" data-day="3">
+    <div class="card route-card" data-category="rocks" data-dist="17" data-diff="1">
       <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Кривопольский">
-        <div class="day-tag">ДЕНЬ 3</div>
-        <div class="badge">🚗 Авто 35 км + 🚶 4 км</div>
+        <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80" alt="Терношоры">
+        <div class="diff-tag">🟢 Легкая сложность</div>
+        <div class="badge">🚗 Авто 17 км</div>
       </div>
       <div class="content">
-        <span class="road-tag">🛣️ ИДЕАЛЬНЫЙ АСФАЛЬТ (Р-24)</span>
-        <h2 class="title">Кривопольский Перевал (961 м)</h2>
-        <div class="meta-info"><span>Высокогорный перевал</span><span>Сосновый лес</span></div>
-        <p class="description">Один из самых высоких перевалов Карпат. Ровный подъезд по асфальту, парковка у трассы и прогулка по открытому хребту.</p>
-        <a href="mapsme://map?ll=48.2000,24.7000&n=Кривопольский%20перевал" class="btn">Открыть в MAPS.ME</a>
+        <span class="road-tag">🛣️ АСФАЛЬТ ДО СЕЛА</span>
+        <h2 class="title">Терношорская Лада (Скалы)</h2>
+        <div class="meta-info"><span>Скальный комплекс</span><span>Место силы</span></div>
+        <p class="description">Уникальное древнее скальное святилище высотой до 40 метров на склоне горы среди хвойного леса.</p>
+        <div class="btn-group">
+          <a href="https://karpaty.info/ua/uk/if/vh/snidavka/sights/ternoshory/" target="_blank" class="btn btn-secondary">📖 Описание места</a>
+          <a href="mapsme://map?ll=48.2322,24.9083&n=Терношоры" class="btn">MAPS.ME</a>
+        </div>
       </div>
     </div>
 
     <!-- Локация 4 -->
-    <div class="card route-card" data-day="4">
+    <div class="card route-card" data-category="mountains" data-dist="14" data-diff="1">
       <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80" alt="Шешоры">
-        <div class="day-tag">ДЕНЬ 4</div>
-        <div class="badge">🚗 Авто 28 км</div>
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Смотрич">
+        <div class="diff-tag">🟢 Легкая сложность</div>
+        <div class="badge">🚗 Авто 14 км</div>
       </div>
       <div class="content">
-        <span class="road-tag">🛣️ ХОРОШИЙ АСФАЛЬТ</span>
-        <h2 class="title">Шешорские Сребристые Водопады</h2>
-        <div class="meta-info"><span>Горная река</span><span>Скальные каскады</span></div>
-        <p class="description">Живописные каскадные водопады (Большой и Малый Гук) на реке Пистынька. Удобный подъезд и места для отдыха у воды.</p>
-        <a href="mapsme://map?ll=48.3351,24.9894&n=Шешорские%20водопады" class="btn">Открыть в MAPS.ME</a>
+        <span class="road-tag">🛣️ ХОРОШИЙ АСФАЛЬТ (Р-24)</span>
+        <h2 class="title">Смотровые Верховины & Гора Смотрич</h2>
+        <div class="meta-info"><span>Высокий холм</span><span>Вид на долину</span></div>
+        <p class="description">Полонина и смотровая точка прямо над Верховиной. Удобный подъезд по асфальту и легкая прогулка к лучшей панораме на город.</p>
+        <div class="btn-group">
+          <a href="https://karpaty.info/ua/uk/if/vh/verkhovyna/" target="_blank" class="btn btn-secondary">📖 Описание места</a>
+          <a href="mapsme://map?ll=48.1583,24.8286&n=Верховина%20Вид" class="btn">MAPS.ME</a>
+        </div>
       </div>
     </div>
 
     <!-- Локация 5 -->
-    <div class="card route-card" data-day="5">
+    <div class="card route-card" data-category="waterfalls" data-dist="22" data-diff="1">
       <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Виадук Ворохта">
-        <div class="day-tag">ДЕНЬ 5</div>
-        <div class="badge">🚗 Авто 30 км</div>
+        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Шешоры">
+        <div class="diff-tag">🟢 Легкая сложность</div>
+        <div class="badge">🚗 Авто 22 км</div>
       </div>
       <div class="content">
-        <span class="road-tag">🛣️ ГЛАДКИЙ АСФАЛЬТ</span>
-        <h2 class="title">Австрийские Арочные Виадуки (Ворохта)</h2>
-        <div class="meta-info"><span>Архитектура 1895 г.</span><span>Каменный мост</span></div>
-        <p class="description">Столетние стометровые каменные мосты австро-венгерской эпохи среди карпатских холмов. Парковка прямо у моста.</p>
-        <a href="mapsme://map?ll=48.2825,24.5627&n=Виадук%20Ворохта" class="btn">Открыть в MAPS.ME</a>
+        <span class="road-tag">🛣️ ИДЕАЛЬНЫЙ АСФАЛЬТ</span>
+        <h2 class="title">Шешорские Сребристые Водопады</h2>
+        <div class="meta-info"><span>Живописная река</span><span>Скальный порог</span></div>
+        <p class="description">Красивый каскадный водопад (Большой и Малый Гук) на реке Пистынька. Удобный подъезд к самой воде.</p>
+        <div class="btn-group">
+          <a href="https://karpaty.info/ua/uk/if/ks/sheshory/sights/водопады/" target="_blank" class="btn btn-secondary">📖 Описание места</a>
+          <a href="mapsme://map?ll=48.3351,24.9894&n=Шешорские%20Водопады" class="btn">MAPS.ME</a>
+        </div>
       </div>
     </div>
 
     <!-- Локация 6 -->
-    <div class="card route-card" data-day="6">
+    <div class="card route-card" data-category="waterfalls" data-dist="18" data-diff="1">
       <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Смотрич взгляд">
-        <div class="day-tag">ДЕНЬ 6</div>
-        <div class="badge">🚗 Авто 18 км + 🚶 3 км</div>
+        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Черемош">
+        <div class="diff-tag">🟢 Легкая сложность</div>
+        <div class="badge">🚗 Авто 18 км</div>
       </div>
       <div class="content">
-        <span class="road-tag">🛣️ АСФАЛЬТ ДО СТАРТА</span>
-        <h2 class="title">Ущелье Реки Чёрный Черемош</h2>
-        <div class="meta-info"><span>Каньон реки</span><span>Скалистые берега</span></div>
-        <p class="description">Живописная горная долина вдоль бурной реки с высокими скальными обрывами и подвесными мостиками.</p>
-        <a href="mapsme://map?ll=48.1620,24.8230&n=Чёрный%20Черемош" class="btn">Открыть в MAPS.ME</a>
+        <span class="road-tag">🛣️ АСФАЛЬТ ВДОЛЬ РЕКИ</span>
+        <h2 class="title">Каньон Чёрного Черемоша</h2>
+        <div class="meta-info"><span>Горная река</span><span>Подвесные мосты</span></div>
+        <p class="description">Скальное ущелье с бурной рекой. Прогулка по живописным подвесным мостикам над водой вдоль скалистых берегов.</p>
+        <div class="btn-group">
+          <a href="https://drymba.net/uk/10350-chonyy-cheremosh-pohlyad" target="_blank" class="btn btn-secondary">📖 Описание места</a>
+          <a href="mapsme://map?ll=48.1620,24.8230&n=Чёрный%20Черемош" class="btn">MAPS.ME</a>
+        </div>
       </div>
     </div>
 
     <!-- Локация 7 -->
-    <div class="card route-card" data-day="7">
+    <div class="card route-card" data-category="forests" data-dist="20" data-diff="1">
       <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&w=800&q=80" alt="Яремче">
-        <div class="day-tag">ДЕНЬ 7</div>
-        <div class="badge">🚗 Авто 55 км</div>
+        <img src="https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&w=800&q=80" alt="Гора Зорька">
+        <div class="diff-tag">🟢 Легкая сложность</div>
+        <div class="badge">🚗 Авто 20 км</div>
       </div>
       <div class="content">
-        <span class="road-tag">🛣️ ТРАССА ЕВРО-УРОВНЯ (Н-09)</span>
-        <h2 class="title">Водопад Пробий & Каньон (Яремче)</h2>
-        <div class="meta-info"><span>Мощный водопад</span><span>Заповедник</span></div>
-        <p class="description">Полноводный 8-метровый водопад с пешеходным мостом над бурлящим каньоном. Удобная асфальтированная парковка.</p>
-        <a href="mapsme://map?ll=48.4392,24.5397&n=Водопад%20Пробий" class="btn">Открыть в MAPS.ME</a>
+        <span class="road-tag">🛣️ АСФАЛЬТ</span>
+        <h2 class="title">Гора Зорька & Сосновый Лес</h2>
+        <div class="meta-info"><span>Панорама Косова</span><span>Сосновый бор</span></div>
+        <p class="description">Невысокая, но очень красивая панорамная гора с густым сосновым бором на въезде в Косов. Легкая прогулка и свежий воздух.</p>
+        <div class="btn-group">
+          <a href="https://karpaty.info/ua/uk/if/ks/kosiv/" target="_blank" class="btn btn-secondary">📖 Описание места</a>
+          <a href="mapsme://map?ll=48.3183,24.9931&n=Гора%20Зорька" class="btn">MAPS.ME</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Локация 8 -->
+    <div class="card route-card" data-category="rocks" data-dist="24" data-diff="2">
+      <div class="card-img-wrap">
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Сокольская скала">
+        <div class="diff-tag">🟡 Средняя сложность</div>
+        <div class="badge">🚗 Авто 24 км</div>
+      </div>
+      <div class="content">
+        <span class="road-tag">🛣️ ХОРОШИЙ АСФАЛЬТ</span>
+        <h2 class="title">Сокольская Скала (Сокільський Хребет)</h2>
+        <div class="meta-info"><span>Острый гребень</span><span>Скалистые обрывы</span></div>
+        <p class="description">Мощный отвесный каменный массив над рекой Рыбница. На вершине хребта находятся десятки живописных скал-останцев.</p>
+        <div class="btn-group">
+          <a href="https://drymba.net/uk/10360-sokilskyy-khrebet-skali" target="_blank" class="btn btn-secondary">📖 Описание места</a>
+          <a href="mapsme://map?ll=48.2721,25.0880&n=Сокольская%20Скала" class="btn">MAPS.ME</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Локация 9 -->
+    <div class="card route-card" data-category="forests" data-dist="28" data-diff="2">
+      <div class="card-img-wrap">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Полонина Крынта">
+        <div class="diff-tag">🔴 Высокая сложность</div>
+        <div class="badge">🚗 Авто 15 км + 🚶 Пешком</div>
+      </div>
+      <div class="content">
+        <span class="road-tag">🥾 ПЕШИЙ ВЫХОД</span>
+        <h2 class="title">Полонина Крынта (1350 м)</h2>
+        <div class="meta-info"><span>Высокогорная полонина</span><span>Заповедный лес</span></div>
+        <p class="description">Огромная высокогорная полонина с еловым вековым лесом вокруг и великолепным видом на полный Черногорский хребет.</p>
+        <div class="btn-group">
+          <a href="https://drymba.net/uk/10370-krynta-polonyna" target="_blank" class="btn btn-secondary">📖 Описание места</a>
+          <a href="mapsme://map?ll=48.1340,24.8720&n=Полонина%20Крынта" class="btn">MAPS.ME</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Локация 10 -->
+    <div class="card route-card" data-category="waterfalls" data-dist="26" data-diff="1">
+      <div class="card-img-wrap">
+        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Водопад Косовский Гук">
+        <div class="diff-tag">🟢 Легкая сложность</div>
+        <div class="badge">🚗 Авто 26 км</div>
+      </div>
+      <div class="content">
+        <span class="road-tag">🛣️ АСФАЛЬТ ДО ПАРКОВКИ</span>
+        <h2 class="title">Косовский Водопад (Гук)</h2>
+        <div class="meta-info"><span>Широкий водопад</span><span>Скалистые берега</span></div>
+        <p class="description">Живописный водопад на окраине города Косов с мощным потоком воды, пробивающим путь сквозь песчаниковые скалы.</p>
+        <div class="btn-group">
+          <a href="https://karpaty.info/ua/uk/if/ks/kosiv/sights/водопад/" target="_blank" class="btn btn-secondary">📖 Описание места</a>
+          <a href="mapsme://map?ll=48.3120,25.0830&n=Косовский%20Водопад" class="btn">MAPS.ME</a>
+        </div>
       </div>
     </div>
 
   </div>
 
   <script>
-    // Картографические метки красивых мест
+    // Картографические метки локаций вокруг дома
     const home = [48.253884, 24.917059];
-    const map = L.map('map').setView(home, 10);
+    const map = L.map('map').setView(home, 11);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(map);
 
     L.marker(home).addTo(map).bindPopup('<b>🏡 Домик</b>').openPopup();
     L.marker([48.1818, 24.9792]).addTo(map).bindPopup('Скалы Писаный Камень');
     L.marker([48.2056, 24.8450]).addTo(map).bindPopup('Хребет Игрец');
-    L.marker([48.2000, 24.7000]).addTo(map).bindPopup('Кривопольский Перевал');
+    L.marker([48.2322, 24.9083]).addTo(map).bindPopup('Терношорская Лада');
+    L.marker([48.1583, 24.8286]).addTo(map).bindPopup('Верховина Смотрич');
     L.marker([48.3351, 24.9894]).addTo(map).bindPopup('Шешорские Водопады');
-    L.marker([48.2825, 24.5627]).addTo(map).bindPopup('Виадук Ворохта');
-    L.marker([48.4392, 24.5397]).addTo(map).bindPopup('Водопад Пробий');
+    L.marker([48.1620, 24.8230]).addTo(map).bindPopup('Каньон Черемоша');
+    L.marker([48.3183, 24.9931]).addTo(map).bindPopup('Гора Зорька');
+    L.marker([48.2721, 25.0880]).addTo(map).bindPopup('Сокольская Скала');
+    L.marker([48.1340, 24.8720]).addTo(map).bindPopup('Полонина Крынта');
+    L.marker([48.3120, 25.0830]).addTo(map).bindPopup('Косовский Водопад');
 
-    function filterDay(day) {
-      document.querySelectorAll('.day-chip').forEach(c => c.classList.remove('active'));
-      event.target.classList.add('active');
-      document.querySelectorAll('.route-card').forEach(card => {
-        card.style.display = (day === 'all' || card.getAttribute('data-day') === day) ? 'flex' : 'none';
+    function applyFilters() {
+      const catVal = document.getElementById('category-filter').value;
+      const sortVal = document.getElementById('sort-filter').value;
+      const container = document.getElementById('routes');
+      const cards = Array.from(document.querySelectorAll('.route-card'));
+
+      // 1. Фильтрация по категории
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (catVal === 'all' || cat === catVal) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
       });
+
+      // 2. Сортировка
+      cards.sort((a, b) => {
+        const distA = parseInt(a.getAttribute('data-dist'));
+        const distB = parseInt(b.getAttribute('data-dist'));
+        const diffA = parseInt(a.getAttribute('data-diff'));
+        const diffB = parseInt(b.getAttribute('data-diff'));
+
+        if (sortVal === 'dist-asc') return distA - distB;
+        if (sortVal === 'dist-desc') return distB - distA;
+        if (sortVal === 'diff-asc') return diffA - diffB;
+        if (sortVal === 'diff-desc') return diffB - diffA;
+        return 0;
+      });
+
+      // Перестраиваем порядок DOM элементов
+      cards.forEach(card => container.appendChild(card));
     }
 
     if ('serviceWorker' in navigator) {
